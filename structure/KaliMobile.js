@@ -2,7 +2,7 @@ import { Box, Link, IconButton, Text } from "@chakra-ui/react";
 import { AiFillHome } from "react-icons/ai";
 import { routeHome } from "../../utils/router";
 
-export default function Kali() {
+export default function SportsClub() {
   const home = () => {
     routeHome();
     console.log("click");
@@ -14,12 +14,12 @@ export default function Kali() {
         letterSpacing="wide"
         fontWeight="extrabold"
         fontSize="md"
-        bgGradient="linear(to-br, kali.900, kali.600)"
+        bgGradient="linear(to-br, sportsClubDao.900, sportsClubDao.600)"
         bgClip="text"
-        textShadow="2.4px 0.4px kali.900"
+        textShadow="2.4px 0.4px sportsClubDao.900"
         ml={2}
       >
-        <Link onClick={home}>KaliDAO</Link>
+        <Link onClick={home}>SportsClubDAO</Link>
       </Box>
     </>
   );

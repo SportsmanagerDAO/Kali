@@ -10,11 +10,11 @@ export default function Kali() {
   return (
     <>
       <Heading
-        id="kali-logo"
+        id="sports-club-dao-logo"
         letterSpacing="wide"
         fontWeight="extrabold"
       >
-        <Link onClick={home}>KaliDAO</Link>
+        <Link onClick={home}>SportsClubDAO</Link>
       </Heading>
     </>
   );

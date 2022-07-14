@@ -32,14 +32,14 @@ export default function NewProposal(props) {
   const ProposalTile = (props) => {
     return (
       <LinkBox
-        bg="kali.900"
+        bg="sportsClubDao.900"
         border="1px solid"
         p={5}
         m={2}
         borderRadius="2xl"
         //boxShadow="lg"
         _hover={{
-          bgGradient: "linear(to-br, kali.600, kali.700)",
+          bgGradient: "linear(to-br, sportsClubDao.600, sportsClubDao.700)",
         }}
       >
         <LinkOverlay href="#" onClick={() => setMenuItem(props.id)}>
@@ -86,8 +86,8 @@ export default function NewProposal(props) {
                 <Select
                   name="menuItem" // will have to convert to proposalType corresponding with smart contract enums
                   onChange={updateMenuItem}
-                  color="kali.800"
-                  bg="kali.900"
+                  color="sportsClubDao.800"
+                  bg="sportsClubDao.900"
                   opacity="0.9"
                 >
                   <option value="999">Select a proposal type</option>

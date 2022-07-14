@@ -1,5 +1,5 @@
 {
-  "name": "kali-dao",
+  "name": "sports-club-dao",
   "private": false,
   "scripts": {
     "dev": "next dev",

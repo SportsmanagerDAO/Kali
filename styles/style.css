@@ -134,7 +134,7 @@ select {
 /* //////////////// DEPLOYER //////////////// */
 #container-deployer #nav-right-container,
 #container-deployer #nav-right-container button,
-#container-deployer #kali-logo,
+#container-deployer #sports-club-dao-logo,
 #container-deployer
  {
   color: white;
@@ -243,7 +243,7 @@ div#dao-main {
   margin-top: 50px;
 }
 
-#dao-sidebar button, #dao-sidebar #kali-logo {
+#dao-sidebar button, #dao-sidebar #sports-club-dao-logo {
   color: #5a2686
 }
 

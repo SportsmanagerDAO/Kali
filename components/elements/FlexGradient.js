@@ -6,9 +6,9 @@ const FlexGradient = (props) => {
     <Flex
       display="flex"
       flexDirection="column"
-      // bgGradient="linear(to-br, kali.200, kali.100)"
+      // bgGradient="linear(to-br, sportsClubDao.200, sportsClubDao.100)"
       p={5}
-      // color="kali.900"
+      // color="sportsClubDao.900"
       fontSize="md"
       letterSpacing="wide"
       lineHeight="tight"

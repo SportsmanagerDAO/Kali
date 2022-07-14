@@ -11,7 +11,7 @@ export default function Chain() {
   console.log(chainId);
   let bg;
   if(chainId==daoChain) {
-    bg="linear(to-br, kali.600, kali.700)";
+    bg="linear(to-br, sportsClubDao.600, sportsClubDao.700)";
   } else {
     bg="linear(to-br, grey, grey)";
   }

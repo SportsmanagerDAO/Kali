@@ -15,9 +15,9 @@ async function advanceTime(time) {
   await ethers.provider.send("evm_increaseTime", [time])
 }
 
-describe("KaliDAO", function () {
-  let Kali // KaliDAO contract
-  let kali // KaliDAO contract instance
+describe("SportsClubDAO", function () {
+  let SportsClub // SportsClubDAO contract
+  let sportsClub // SportsClubDAO contract instance
   let proposer // signerA
   let alice // signerB
   let bob // signerC
@@ -25,18 +25,19 @@ describe("KaliDAO", function () {
   beforeEach(async () => {
     ;[proposer, alice, bob] = await ethers.getSigners()
 
-    Kali = await ethers.getContractFactory("KaliDAO")
-    kali = await Kali.deploy()
-    await kali.deployed()
-    // console.log(kali.address)
+    // SportsClub = await ethers.getContractFactory("SportsClubDAO")
+    SportsClub = await ethers.getContractFactory("KaliDAO")
+    sportsClub = await SportsClub.deploy()
+    await sportsClub.deployed()
+    // console.log(sportsClub.address)
     // console.log("alice eth balance", await alice.getBalance())
     // console.log("bob eth balance", await bob.getBalance())
   })
 
   it("Should initialize with correct params", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -46,30 +47,30 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 0]
     )
-    expect(await kali.name()).to.equal("KALI")
-    expect(await kali.symbol()).to.equal("KALI")
-    expect(await kali.docs()).to.equal("DOCS")
-    expect(await kali.paused()).to.equal(false)
-    expect(await kali.balanceOf(proposer.address)).to.equal(getBigNumber(10))
-    expect(await kali.votingPeriod()).to.equal(30)
-    expect(await kali.quorum()).to.equal(30)
-    expect(await kali.supermajority()).to.equal(60)
-    expect(await kali.proposalVoteTypes(0)).to.equal(0)
-    expect(await kali.proposalVoteTypes(1)).to.equal(0)
-    expect(await kali.proposalVoteTypes(2)).to.equal(0)
-    expect(await kali.proposalVoteTypes(3)).to.equal(0)
-    expect(await kali.proposalVoteTypes(4)).to.equal(0)
-    expect(await kali.proposalVoteTypes(5)).to.equal(0)
-    expect(await kali.proposalVoteTypes(6)).to.equal(0)
-    expect(await kali.proposalVoteTypes(7)).to.equal(1)
-    expect(await kali.proposalVoteTypes(8)).to.equal(2)
-    expect(await kali.proposalVoteTypes(9)).to.equal(3)
-    expect(await kali.proposalVoteTypes(10)).to.equal(0)
+    expect(await sportsClub.name()).to.equal("SPORTSCLUB")
+    expect(await sportsClub.symbol()).to.equal("SPORTSCLUB")
+    expect(await sportsClub.docs()).to.equal("DOCS")
+    expect(await sportsClub.paused()).to.equal(false)
+    expect(await sportsClub.balanceOf(proposer.address)).to.equal(getBigNumber(10))
+    expect(await sportsClub.votingPeriod()).to.equal(30)
+    expect(await sportsClub.quorum()).to.equal(30)
+    expect(await sportsClub.supermajority()).to.equal(60)
+    expect(await sportsClub.proposalVoteTypes(0)).to.equal(0)
+    expect(await sportsClub.proposalVoteTypes(1)).to.equal(0)
+    expect(await sportsClub.proposalVoteTypes(2)).to.equal(0)
+    expect(await sportsClub.proposalVoteTypes(3)).to.equal(0)
+    expect(await sportsClub.proposalVoteTypes(4)).to.equal(0)
+    expect(await sportsClub.proposalVoteTypes(5)).to.equal(0)
+    expect(await sportsClub.proposalVoteTypes(6)).to.equal(0)
+    expect(await sportsClub.proposalVoteTypes(7)).to.equal(1)
+    expect(await sportsClub.proposalVoteTypes(8)).to.equal(2)
+    expect(await sportsClub.proposalVoteTypes(9)).to.equal(3)
+    expect(await sportsClub.proposalVoteTypes(10)).to.equal(0)
   })
   it("Should revert if initialization gov settings exceed bounds", async function () {
-    expect(await kali.init(
-      "KALI",
-      "KALI",
+    expect(await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -79,9 +80,9 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 0, 1]
     ).should.be.reverted)
-    expect(await kali.init(
-      "KALI",
-      "KALI",
+    expect(await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -93,9 +94,9 @@ describe("KaliDAO", function () {
     ).should.be.reverted)
   })
   it("Should revert if initialization arrays don't match", async function () {
-    expect(await kali.init(
-      "KALI",
-      "KALI",
+    expect(await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [bob.address],
@@ -105,9 +106,9 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ).should.be.reverted)
-    expect(await kali.init(
-      "KALI",
-      "KALI",
+    expect(await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -119,9 +120,9 @@ describe("KaliDAO", function () {
     ).should.be.reverted)
   })
   it("Should revert if already initialized", async function () {
-    expect(await kali.init(
-      "KALI",
-      "KALI",
+    expect(await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -131,9 +132,9 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ))
-    expect(await kali.init(
-      "KALI",
-      "KALI",
+    expect(await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -145,9 +146,9 @@ describe("KaliDAO", function () {
     ).should.be.reverted)
   })
   it("Should revert if voting period is initialized null or longer than year", async function () {
-    expect(await kali.init(
-      "KALI",
-      "KALI",
+    expect(await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -157,9 +158,9 @@ describe("KaliDAO", function () {
       0,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ).should.be.reverted)
-    expect(await kali.init(
-      "KALI",
-      "KALI",
+    expect(await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -171,9 +172,9 @@ describe("KaliDAO", function () {
     ).should.be.reverted)
   })
   it("Should revert if quorum is initialized greater than 100", async function () {
-    expect(await kali.init(
-      "KALI",
-      "KALI",
+    expect(await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -185,9 +186,9 @@ describe("KaliDAO", function () {
     ).should.be.reverted)
   })
   it("Should revert if supermajority is initialized less than 52 or greater than 100", async function () {
-    expect(await kali.init(
-      "KALI",
-      "KALI",
+    expect(await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -197,9 +198,9 @@ describe("KaliDAO", function () {
       30,
       [100, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ).should.be.reverted)
-    expect(await kali.init(
-      "KALI",
-      "KALI",
+    expect(await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -211,9 +212,9 @@ describe("KaliDAO", function () {
     ).should.be.reverted)
   })
   it("Should revert if proposal arrays don't match", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -223,7 +224,7 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    expect(await kali.propose(
+    expect(await sportsClub.propose(
       0,
       "TEST",
       [bob.address, alice.address],
@@ -232,9 +233,9 @@ describe("KaliDAO", function () {
     ).should.be.reverted)
   })
   it("Should revert if period proposal is for null or longer than year", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -245,21 +246,21 @@ describe("KaliDAO", function () {
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
     // normal
-    await kali.propose(
+    await sportsClub.propose(
       3,
       "TEST",
       [bob.address],
       [9000],
       [0x00]
     )
-    expect(await kali.propose(
+    expect(await sportsClub.propose(
       3,
       "TEST",
       [bob.address],
       [0],
       [0x00]
     ).should.be.reverted)
-    expect(await kali.propose(
+    expect(await sportsClub.propose(
       3,
       "TEST",
       [bob.address],
@@ -268,9 +269,9 @@ describe("KaliDAO", function () {
     ).should.be.reverted)
   })
   it("Should revert if quorum proposal is for greater than 100", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -281,14 +282,14 @@ describe("KaliDAO", function () {
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
     // normal
-    await kali.propose(
+    await sportsClub.propose(
       4,
       "TEST",
       [bob.address],
       [20],
       [0x00]
     )
-    expect(await kali.propose(
+    expect(await sportsClub.propose(
       4,
       "TEST",
       [bob.address],
@@ -297,9 +298,9 @@ describe("KaliDAO", function () {
     ).should.be.reverted)
   })
   it("Should revert if supermajority proposal is for less than 52 or greater than 100", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -310,21 +311,21 @@ describe("KaliDAO", function () {
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
     // normal
-    await kali.propose(
+    await sportsClub.propose(
       5,
       "TEST",
       [bob.address],
       [60],
       [0x00]
     )
-    expect(await kali.propose(
+    expect(await sportsClub.propose(
       5,
       "TEST",
       [bob.address],
       [51],
       [0x00]
     ).should.be.reverted)
-    expect(await kali.propose(
+    expect(await sportsClub.propose(
       5,
       "TEST",
       [bob.address],
@@ -333,9 +334,9 @@ describe("KaliDAO", function () {
     ).should.be.reverted)
   })
   it("Should revert if type proposal has proposal type greater than 10, vote type greater than 3, or setting length isn't 2", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -346,28 +347,28 @@ describe("KaliDAO", function () {
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
     // normal
-    await kali.propose(
+    await sportsClub.propose(
       6,
       "TEST",
       [bob.address, alice.address],
       [0, 1],
       [0x00, 0x00]
     )
-    expect(await kali.propose(
+    expect(await sportsClub.propose(
       6,
       "TEST",
       [bob.address, alice.address],
       [11, 2],
       [0x00, 0x00]
     ).should.be.reverted)
-    expect(await kali.propose(
+    expect(await sportsClub.propose(
       6,
       "TEST",
       [bob.address, alice.address],
       [0, 5],
       [0x00, 0x00]
     ).should.be.reverted)
-    expect(await kali.propose(
+    expect(await sportsClub.propose(
       6,
       "TEST",
       [proposer.address, bob.address, alice.address],
@@ -376,9 +377,9 @@ describe("KaliDAO", function () {
     ).should.be.reverted)
   })
   it("Should allow proposer to cancel unsponsored proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -388,19 +389,19 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.connect(alice).propose(
+    await sportsClub.connect(alice).propose(
       0,
       "TEST",
       [alice.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.connect(alice).cancelProposal(1)
+    await sportsClub.connect(alice).cancelProposal(1)
   })
   it("Should forbid non-proposer from cancelling unsponsored proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -410,19 +411,19 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.connect(alice).propose(
+    await sportsClub.connect(alice).propose(
       0,
       "TEST",
       [alice.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    expect(await kali.cancelProposal(0).should.be.reverted)
+    expect(await sportsClub.cancelProposal(0).should.be.reverted)
   })
   it("Should forbid proposer from cancelling sponsored proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -432,20 +433,20 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.connect(alice).propose(
+    await sportsClub.connect(alice).propose(
       0,
       "TEST",
       [alice.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.sponsorProposal(1)
-    expect(await kali.connect(alice).cancelProposal(1).should.be.reverted)
+    await sportsClub.sponsorProposal(1)
+    expect(await sportsClub.connect(alice).cancelProposal(1).should.be.reverted)
   })
   it("Should forbid cancelling non-existent proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -455,19 +456,19 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.connect(alice).propose(
+    await sportsClub.connect(alice).propose(
       0,
       "TEST",
       [alice.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    expect(await kali.connect(alice).cancelProposal(10).should.be.reverted)
+    expect(await sportsClub.connect(alice).cancelProposal(10).should.be.reverted)
   })
   it("Should allow sponsoring proposal and processing", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -477,23 +478,23 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.connect(alice).propose(
+    await sportsClub.connect(alice).propose(
       0,
       "TEST",
       [alice.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.sponsorProposal(1)
-    await kali.vote(1, true)
+    await sportsClub.sponsorProposal(1)
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.balanceOf(alice.address)).to.equal(getBigNumber(1000))
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.balanceOf(alice.address)).to.equal(getBigNumber(1000))
   })
   it("Should forbid non-member from sponsoring proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -503,19 +504,19 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.connect(alice).propose(
+    await sportsClub.connect(alice).propose(
       0,
       "TEST",
       [alice.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    expect(await kali.connect(alice).sponsorProposal(0).should.be.reverted)
+    expect(await sportsClub.connect(alice).sponsorProposal(0).should.be.reverted)
   })
   it("Should forbid sponsoring non-existent or processed proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -525,25 +526,25 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.connect(alice).propose(
+    await sportsClub.connect(alice).propose(
       0,
       "TEST",
       [alice.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.sponsorProposal(1)
-    await kali.vote(1, true)
+    await sportsClub.sponsorProposal(1)
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.balanceOf(alice.address)).to.equal(getBigNumber(1000))
-    expect(await kali.sponsorProposal(1).should.be.reverted)
-    expect(await kali.sponsorProposal(100).should.be.reverted)
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.balanceOf(alice.address)).to.equal(getBigNumber(1000))
+    expect(await sportsClub.sponsorProposal(1).should.be.reverted)
+    expect(await sportsClub.sponsorProposal(100).should.be.reverted)
   })
   it("Should forbid sponsoring an already sponsored proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -553,20 +554,20 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.connect(alice).propose(
+    await sportsClub.connect(alice).propose(
       0,
       "TEST",
       [alice.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.sponsorProposal(1)
-    expect(await kali.sponsorProposal(1).should.be.reverted)
+    await sportsClub.sponsorProposal(1)
+    expect(await sportsClub.sponsorProposal(1).should.be.reverted)
   })
   it("Should allow self-sponsorship by a member", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -576,19 +577,19 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(
+    await sportsClub.propose(
       0,
       "TEST",
       [proposer.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.vote(1, true)
+    await sportsClub.vote(1, true)
   })
   it("Should forbid a non-member from voting on proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -598,19 +599,19 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(
+    await sportsClub.propose(
       0,
       "TEST",
       [proposer.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    expect(await kali.connect(alice).vote(1, true).should.be.reverted)
+    expect(await sportsClub.connect(alice).vote(1, true).should.be.reverted)
   })
   it("Should forbid a member from voting again on proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -620,20 +621,20 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(
+    await sportsClub.propose(
       0,
       "TEST",
       [proposer.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.vote(1, true)
-    expect(await kali.vote(1, true).should.be.reverted)
+    await sportsClub.vote(1, true)
+    expect(await sportsClub.vote(1, true).should.be.reverted)
   })
   it("Should forbid voting after period ends", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -643,7 +644,7 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(
+    await sportsClub.propose(
       0,
       "TEST",
       [proposer.address],
@@ -651,12 +652,12 @@ describe("KaliDAO", function () {
       [0x00]
     )
     await advanceTime(35)
-    expect(await kali.vote(1, true).should.be.reverted)
+    expect(await sportsClub.vote(1, true).should.be.reverted)
   })
   it("Should process membership proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -666,22 +667,22 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(
+    await sportsClub.propose(
       0,
       "TEST",
       [proposer.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.vote(1, true)
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.balanceOf(proposer.address)).to.equal(getBigNumber(1001))
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.balanceOf(proposer.address)).to.equal(getBigNumber(1001))
   })
   it("voteBySig should revert if the signature is invalid", async () => {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -691,18 +692,18 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(0, "TEST", [alice.address], [0], [0x00])
+    await sportsClub.propose(0, "TEST", [alice.address], [0], [0x00])
     const rs = ethers.utils.formatBytes32String("rs")
     expect(
-      kali.voteBySig(proposer.address, 0, true, 0, rs, rs).should.be.reverted
+      sportsClub.voteBySig(proposer.address, 0, true, 0, rs, rs).should.be.reverted
     )
   })
   it("Should process membership proposal via voteBySig", async () => {
     const domain = {
-      name: "KALI",
+      name: "SPORTSCLUB",
       version: "1",
       chainId: 31337,
-      verifyingContract: kali.address,
+      verifyingContract: sportsClub.address,
     }
     const types = {
       SignVote: [
@@ -717,9 +718,9 @@ describe("KaliDAO", function () {
       approve: true,
     }
 
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -729,20 +730,20 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(0, "TEST", [alice.address], [getBigNumber(1000)], [0x00])
+    await sportsClub.propose(0, "TEST", [alice.address], [getBigNumber(1000)], [0x00])
 
     const signature = await proposer._signTypedData(domain, types, value)
     const { r, s, v } = ethers.utils.splitSignature(signature)
 
-    await kali.voteBySig(proposer.address, 1, true, v, r, s)
+    await sportsClub.voteBySig(proposer.address, 1, true, v, r, s)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.balanceOf(alice.address)).to.equal(getBigNumber(1000))
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.balanceOf(alice.address)).to.equal(getBigNumber(1000))
   })
   it("Should process burn (eviction) proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -752,23 +753,23 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(1, "TEST", [proposer.address], [getBigNumber(1)], [0x00])
-    await kali.vote(1, true)
+    await sportsClub.propose(1, "TEST", [proposer.address], [getBigNumber(1)], [0x00])
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.balanceOf(proposer.address)).to.equal(0)
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.balanceOf(proposer.address)).to.equal(0)
   })
   it("Should process contract call proposal - Single", async function () {
     let FixedERC20 = await ethers.getContractFactory("FixedERC20")
-    let fixedERC20 = await FixedERC20.deploy("kali", "kali", 18, kali.address, getBigNumber(100))
+    let fixedERC20 = await FixedERC20.deploy("sportsClub", "sportsClub", 18, sportsClub.address, getBigNumber(100))
     await fixedERC20.deployed()
     let payload = fixedERC20.interface.encodeFunctionData("transfer", [
       alice.address,
       getBigNumber(15)
     ])
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -778,26 +779,26 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(2, "TEST", [fixedERC20.address], [0], [payload])
-    await kali.vote(1, true)
+    await sportsClub.propose(2, "TEST", [fixedERC20.address], [0], [payload])
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
+    await sportsClub.processProposal(1)
     expect(await fixedERC20.totalSupply()).to.equal(getBigNumber(100))
     expect(await fixedERC20.balanceOf(alice.address)).to.equal(getBigNumber(15))
   })
   it("Should process contract call proposal - Multiple", async function () {
-    // Send Eth to Kali
+    // Send Eth to SportsClub
     proposer.sendTransaction({
-      to: kali.address,
+      to: sportsClub.address,
       value: getBigNumber(10),
     })
     // Instantiate 1st contract
     let FixedERC20 = await ethers.getContractFactory("FixedERC20")
     let fixedERC20 = await FixedERC20.deploy(
-      "kali",
-      "kali",
+      "sportsClub",
+      "sportsClub",
       18,
-      kali.address,
+      sportsClub.address,
       getBigNumber(100)
     )
     await fixedERC20.deployed()
@@ -813,9 +814,9 @@ describe("KaliDAO", function () {
       [alice.address, bob.address],
       "hello",
     ])
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -825,25 +826,25 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(
+    await sportsClub.propose(
       2,
       "TEST",
       [fixedERC20.address, dropETH.address],
       [0, getBigNumber(4)],
       [payload, payload2]
     )
-    await kali.vote(1, true)
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
+    await sportsClub.processProposal(1)
     expect(await fixedERC20.totalSupply()).to.equal(getBigNumber(100))
     expect(await fixedERC20.balanceOf(alice.address)).to.equal(getBigNumber(15))
     expect(await dropETH.amount()).to.equal(getBigNumber(2))
     expect(await dropETH.recipients(1)).to.equal(bob.address)
   })
   it("Should process period proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -853,16 +854,16 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(3, "TEST", [proposer.address], [5], [0x00])
-    await kali.vote(1, true)
+    await sportsClub.propose(3, "TEST", [proposer.address], [5], [0x00])
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.votingPeriod()).to.equal(5)
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.votingPeriod()).to.equal(5)
   })
   it("Should process quorum proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -872,16 +873,16 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(4, "TEST", [proposer.address], [100], [0x00])
-    await kali.vote(1, true)
+    await sportsClub.propose(4, "TEST", [proposer.address], [100], [0x00])
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.quorum()).to.equal(100)
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.quorum()).to.equal(100)
   })
   it("Should process supermajority proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -891,16 +892,16 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(5, "TEST", [proposer.address], [52], [0x00])
-    await kali.vote(1, true)
+    await sportsClub.propose(5, "TEST", [proposer.address], [52], [0x00])
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.supermajority()).to.equal(52)
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.supermajority()).to.equal(52)
   })
   it("Should process type proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -910,22 +911,22 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(
+    await sportsClub.propose(
       6,
       "TEST",
       [proposer.address, proposer.address],
       [0, 3],
       [0x00, 0x00]
     )
-    await kali.vote(1, true)
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.proposalVoteTypes(0)).to.equal(3)
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.proposalVoteTypes(0)).to.equal(3)
   })
   it("Should process pause proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -935,16 +936,16 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(7, "TEST", [proposer.address], [0], [0x00])
-    await kali.vote(1, true)
+    await sportsClub.propose(7, "TEST", [proposer.address], [0], [0x00])
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.paused()).to.equal(false)
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.paused()).to.equal(false)
   })
   it("Should process extension proposal - General", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -954,16 +955,16 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(8, "TEST", [wethAddress], [0], [0x00])
-    await kali.vote(1, true)
+    await sportsClub.propose(8, "TEST", [wethAddress], [0], [0x00])
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.extensions(wethAddress)).to.equal(false)
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.extensions(wethAddress)).to.equal(false)
   })
   it("Should toggle extension proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -973,17 +974,17 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(8, "TEST", [wethAddress], [1], [0x00])
-    await kali.vote(1, true)
+    await sportsClub.propose(8, "TEST", [wethAddress], [1], [0x00])
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.extensions(wethAddress)).to.equal(true)
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.extensions(wethAddress)).to.equal(true)
   })
-  it("Should process extension proposal - KaliDAOcrowdsale with ETH", async function () {
-    // Instantiate KaliDAO
-    await kali.init(
-      "KALI",
-      "KALI",
+  it("Should process extension proposal - SportsClubDAOcrowdsale with ETH", async function () {
+    // Instantiate SportsClubDAO
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -993,20 +994,20 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    // Instantiate KaliWhiteListManager
-    let KaliWhitelistManager = await ethers.getContractFactory(
+    // Instantiate SportsClubWhiteListManager
+    let SportsClubWhitelistManager = await ethers.getContractFactory(
       "KaliWhitelistManager"
     )
-    let kaliWhitelistManager = await KaliWhitelistManager.deploy()
-    await kaliWhitelistManager.deployed()
+    let sportsClubWhitelistManager = await SportsClubWhitelistManager.deploy()
+    await sportsClubWhitelistManager.deployed()
     // Instantiate extension contract
-    let KaliDAOcrowdsale = await ethers.getContractFactory("KaliDAOcrowdsale")
-    let kaliDAOcrowdsale = await KaliDAOcrowdsale.deploy(
-      kaliWhitelistManager.address
+    let SportsClubDAOcrowdsale = await ethers.getContractFactory("KaliDAOcrowdsale")
+    let sportsClubDAOcrowdsale = await SportsClubDAOcrowdsale.deploy(
+      sportsClubWhitelistManager.address
     )
-    await kaliDAOcrowdsale.deployed()
+    await sportsClubDAOcrowdsale.deployed()
     // Set up whitelist
-    await kaliWhitelistManager.createWhitelist(
+    await sportsClubWhitelistManager.createWhitelist(
       1,
       [alice.address],
       "0x074b43252ffb4a469154df5fb7fe4ecce30953ba8b7095fe1e006185f017ad10"
@@ -1022,35 +1023,35 @@ describe("KaliDAO", function () {
         1672174799,
       ]
     )
-    await kali.propose(8, "TEST", [kaliDAOcrowdsale.address], [1], [payload])
-    await kali.vote(1, true)
+    await sportsClub.propose(8, "TEST", [sportsClubDAOcrowdsale.address], [1], [payload])
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    await kaliDAOcrowdsale 
+    await sportsClub.processProposal(1)
+    await sportsClubDAOcrowdsale 
       .connect(alice)
-      .callExtension(kali.address, getBigNumber(50), {
+      .callExtension(sportsClub.address, getBigNumber(50), {
         value: getBigNumber(50),
       })
-    expect(await ethers.provider.getBalance(kali.address)).to.equal(
+    expect(await ethers.provider.getBalance(sportsClub.address)).to.equal(
       getBigNumber(50)
     )
-    expect(await kali.balanceOf(alice.address)).to.equal(getBigNumber(100))
+    expect(await sportsClub.balanceOf(alice.address)).to.equal(getBigNumber(100))
   })
-  it("Should process extension proposal - KaliDAOcrowdsale with ERC20", async function () {
+  it("Should process extension proposal - SportsClubDAOcrowdsale with ERC20", async function () {
     // Instantiate purchaseToken
     let PurchaseToken = await ethers.getContractFactory("FixedERC20")
     let purchaseToken = await PurchaseToken.deploy(
-      "KALI",
-      "KALI",
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "18",
       alice.address,
       getBigNumber(1000)
     )
     await purchaseToken.deployed()
-    // Instantiate KaliDAO
-    await kali.init(
-      "KALI",
-      "KALI",
+    // Instantiate SportsClubDAO
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1060,20 +1061,20 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    // Instantiate KaliWhiteListManager
-    let KaliWhitelistManager = await ethers.getContractFactory(
+    // Instantiate SportsClubWhiteListManager
+    let SportsClubWhitelistManager = await ethers.getContractFactory(
       "KaliWhitelistManager"
     )
-    let kaliWhitelistManager = await KaliWhitelistManager.deploy()
-    await kaliWhitelistManager.deployed()
+    let sportsClubWhitelistManager = await SportsClubWhitelistManager.deploy()
+    await sportsClubWhitelistManager.deployed()
     // Instantiate extension contract
-    let KaliDAOcrowdsale = await ethers.getContractFactory("KaliDAOcrowdsale")
-    let kaliDAOcrowdsale = await KaliDAOcrowdsale.deploy(
-      kaliWhitelistManager.address
+    let SportsClubDAOcrowdsale = await ethers.getContractFactory("KaliDAOcrowdsale")
+    let sportsClubDAOcrowdsale = await SportsClubDAOcrowdsale.deploy(
+      sportsClubWhitelistManager.address
     )
-    await kaliDAOcrowdsale.deployed()
+    await sportsClubDAOcrowdsale.deployed()
     // Set up whitelist
-    await kaliWhitelistManager.createWhitelist(
+    await sportsClubWhitelistManager.createWhitelist(
       1,
       [alice.address],
       "0x074b43252ffb4a469154df5fb7fe4ecce30953ba8b7095fe1e006185f017ad10"
@@ -1083,25 +1084,25 @@ describe("KaliDAO", function () {
       ["uint256", "address", "uint8", "uint96", "uint32"],
       [1, purchaseToken.address, 2, getBigNumber(100), 1672174799]
     )
-    await kali.propose(8, "TEST", [kaliDAOcrowdsale.address], [1], [payload])
-    await kali.vote(1, true)
+    await sportsClub.propose(8, "TEST", [sportsClubDAOcrowdsale.address], [1], [payload])
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
+    await sportsClub.processProposal(1)
     await purchaseToken
       .connect(alice)
-      .approve(kaliDAOcrowdsale.address, getBigNumber(50))
-    await kaliDAOcrowdsale
+      .approve(sportsClubDAOcrowdsale.address, getBigNumber(50))
+    await sportsClubDAOcrowdsale
       .connect(alice)
-      .callExtension(kali.address, getBigNumber(50))
-    expect(await purchaseToken.balanceOf(kali.address)).to.equal(
+      .callExtension(sportsClub.address, getBigNumber(50))
+    expect(await purchaseToken.balanceOf(sportsClub.address)).to.equal(
       getBigNumber(50)
     )
-    expect(await kali.balanceOf(alice.address)).to.equal(getBigNumber(100))
+    expect(await sportsClub.balanceOf(alice.address)).to.equal(getBigNumber(100))
   })
   it("Should process escape proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1111,35 +1112,35 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(
+    await sportsClub.propose(
       0,
       "TEST",
       [proposer.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.vote(1, true)
-    await kali.propose(
+    await sportsClub.vote(1, true)
+    await sportsClub.propose(
       0,
       "TEST",
       [proposer.address],
       [getBigNumber(99)],
       [0x00]
     )
-    await kali.vote(2, false)
-    await kali.propose(9, "TEST", [proposer.address], [2], [0x00])
-    await kali.vote(3, true)
+    await sportsClub.vote(2, false)
+    await sportsClub.propose(9, "TEST", [proposer.address], [2], [0x00])
+    await sportsClub.vote(3, true)
     await advanceTime(35)
-    await kali.processProposal(3)
+    await sportsClub.processProposal(3)
     // Proposal #1 remains intact
-    // console.log(await kali.proposals(0))
+    // console.log(await sportsClub.proposals(0))
     // Proposal #2 deleted
-    // console.log(await kali.proposals(1))
+    // console.log(await sportsClub.proposals(1))
   })
   it("Should process docs proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1149,16 +1150,16 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(10, "TEST", [], [], [])
-    await kali.vote(1, true)
+    await sportsClub.propose(10, "TEST", [], [], [])
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.docs()).to.equal("TEST")
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.docs()).to.equal("TEST")
   })
   it("Should forbid processing a non-existent proposal", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1168,12 +1169,12 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    expect(await kali.processProposal(2).should.be.reverted)
+    expect(await sportsClub.processProposal(2).should.be.reverted)
   })
   it("Should forbid processing a proposal that was already processed", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1183,22 +1184,22 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(
+    await sportsClub.propose(
       0,
       "TEST",
       [proposer.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.vote(1, true)
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.processProposal(1).should.be.reverted)
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.processProposal(1).should.be.reverted)
   })
   it("Should forbid processing a proposal before voting period ends", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1208,21 +1209,21 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.propose(
+    await sportsClub.propose(
       0,
       "TEST",
       [proposer.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.vote(1, true)
+    await sportsClub.vote(1, true)
     await advanceTime(20)
-    expect(await kali.processProposal(1).should.be.reverted)
+    expect(await sportsClub.processProposal(1).should.be.reverted)
   })
   it("Should forbid processing a proposal before previous processes", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1233,42 +1234,42 @@ describe("KaliDAO", function () {
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
     // normal
-    await kali.propose(
+    await sportsClub.propose(
       0,
       "TEST",
       [proposer.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.vote(1, true)
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
+    await sportsClub.processProposal(1)
     // check case
-    await kali.propose(
+    await sportsClub.propose(
       0,
       "TEST",
       [proposer.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.vote(2, true)
-    await kali.propose(
+    await sportsClub.vote(2, true)
+    await sportsClub.propose(
       0,
       "TEST",
       [proposer.address],
       [getBigNumber(1000)],
       [0x00]
     )
-    await kali.vote(3, true)
+    await sportsClub.vote(3, true)
     await advanceTime(35)
-    expect(await kali.processProposal(3).should.be.reverted)
-    await kali.processProposal(2)
-    await kali.processProposal(3)
+    expect(await sportsClub.processProposal(3).should.be.reverted)
+    await sportsClub.processProposal(2)
+    await sportsClub.processProposal(3)
   })
   it("Should forbid calling a non-whitelisted extension", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1278,12 +1279,12 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    expect(await kali.callExtension(wethAddress, 10, 0x0).should.be.reverted)
+    expect(await sportsClub.callExtension(wethAddress, 10, 0x0).should.be.reverted)
   })
   it("Should forbid non-whitelisted extension calling DAO", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1293,15 +1294,15 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    expect(await kali.connect(alice).callExtension(bob.address, 10, 0x0).should.be.reverted)
+    expect(await sportsClub.connect(alice).callExtension(bob.address, 10, 0x0).should.be.reverted)
   })
   it("Should allow a member to transfer shares", async function () {
     let sender, receiver
     ;[sender, receiver] = await ethers.getSigners()
 
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -1311,19 +1312,19 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.transfer(receiver.address, getBigNumber(4))
-    expect(await kali.balanceOf(sender.address)).to.equal(getBigNumber(6))
-    expect(await kali.balanceOf(receiver.address)).to.equal(getBigNumber(4))
-    // console.log(await kali.balanceOf(sender.address))
-    // console.log(await kali.balanceOf(receiver.address))
+    await sportsClub.transfer(receiver.address, getBigNumber(4))
+    expect(await sportsClub.balanceOf(sender.address)).to.equal(getBigNumber(6))
+    expect(await sportsClub.balanceOf(receiver.address)).to.equal(getBigNumber(4))
+    // console.log(await sportsClub.balanceOf(sender.address))
+    // console.log(await sportsClub.balanceOf(receiver.address))
   })
   it("Should not allow a member to transfer excess shares", async function () {
     let sender, receiver
     ;[sender, receiver] = await ethers.getSigners()
 
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -1334,16 +1335,16 @@ describe("KaliDAO", function () {
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
     expect(
-      await kali.transfer(receiver.address, getBigNumber(11)).should.be.reverted
+      await sportsClub.transfer(receiver.address, getBigNumber(11)).should.be.reverted
     )
   })
   it("Should not allow a member to transfer shares if paused", async function () {
     let sender, receiver
     ;[sender, receiver] = await ethers.getSigners()
 
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1354,16 +1355,16 @@ describe("KaliDAO", function () {
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
     expect(
-      await kali.transfer(receiver.address, getBigNumber(1)).should.be.reverted
+      await sportsClub.transfer(receiver.address, getBigNumber(1)).should.be.reverted
     )
   })
   it("Should allow a member to approve pull transfers", async function () {
     let sender, receiver
     ;[sender, receiver] = await ethers.getSigners()
 
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -1373,16 +1374,16 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.approve(receiver.address, getBigNumber(4))
-    expect(await kali.allowance(sender.address, receiver.address)).to.equal(getBigNumber(4))
+    await sportsClub.approve(receiver.address, getBigNumber(4))
+    expect(await sportsClub.allowance(sender.address, receiver.address)).to.equal(getBigNumber(4))
   })
   it("Should allow an approved account to pull transfer (transferFrom)", async function () {
     let sender, receiver
     ;[sender, receiver] = await ethers.getSigners()
 
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -1392,17 +1393,17 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.approve(receiver.address, getBigNumber(4))
-    expect(await kali.allowance(sender.address, receiver.address)).to.equal(getBigNumber(4))
-    await kali.connect(receiver).transferFrom(sender.address, receiver.address, getBigNumber(4))
+    await sportsClub.approve(receiver.address, getBigNumber(4))
+    expect(await sportsClub.allowance(sender.address, receiver.address)).to.equal(getBigNumber(4))
+    await sportsClub.connect(receiver).transferFrom(sender.address, receiver.address, getBigNumber(4))
   })
   it("Should not allow an account to pull transfer (transferFrom) beyond approval", async function () {
     let sender, receiver
     ;[sender, receiver] = await ethers.getSigners()
 
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -1412,17 +1413,17 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.approve(receiver.address, getBigNumber(4))
-    expect(await kali.allowance(sender.address, receiver.address)).to.equal(getBigNumber(4))
-    expect(await kali.connect(receiver).transferFrom(sender.address, receiver.address, getBigNumber(5)).should.be.reverted)
+    await sportsClub.approve(receiver.address, getBigNumber(4))
+    expect(await sportsClub.allowance(sender.address, receiver.address)).to.equal(getBigNumber(4))
+    expect(await sportsClub.connect(receiver).transferFrom(sender.address, receiver.address, getBigNumber(5)).should.be.reverted)
   })
   it("Should not allow an approved account to pull transfer (transferFrom) if paused", async function () {
     let sender, receiver
     ;[sender, receiver] = await ethers.getSigners()
 
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1432,14 +1433,14 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.approve(receiver.address, getBigNumber(4))
-    expect(await kali.allowance(sender.address, receiver.address)).to.equal(getBigNumber(4))
-    expect(await kali.connect(receiver).transferFrom(sender.address, receiver.address, getBigNumber(4)).should.be.reverted)
+    await sportsClub.approve(receiver.address, getBigNumber(4))
+    expect(await sportsClub.allowance(sender.address, receiver.address)).to.equal(getBigNumber(4))
+    expect(await sportsClub.connect(receiver).transferFrom(sender.address, receiver.address, getBigNumber(4)).should.be.reverted)
   })
   it("Should not allow vote tally after current timestamp", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1450,13 +1451,13 @@ describe("KaliDAO", function () {
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
     expect(
-      await kali.getPriorVotes(bob.address, 1941275221).should.be.reverted
+      await sportsClub.getPriorVotes(bob.address, 1941275221).should.be.reverted
     )
   })
   it("Should match current votes to undelegated balance", async function () {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1466,15 +1467,15 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    expect(await kali.getCurrentVotes(bob.address)).to.equal(getBigNumber(10))
+    expect(await sportsClub.getCurrentVotes(bob.address)).to.equal(getBigNumber(10))
   })
   it("Should allow vote delegation", async function () {
     let sender, receiver
     ;[sender, receiver] = await ethers.getSigners()
 
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1484,22 +1485,22 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.delegate(receiver.address)
-    expect(await kali.getCurrentVotes(sender.address)).to.equal(0)
-    expect(await kali.getCurrentVotes(receiver.address)).to.equal(getBigNumber(10))
-    expect(await kali.balanceOf(sender.address)).to.equal(getBigNumber(10))
-    expect(await kali.balanceOf(receiver.address)).to.equal(0)
-    await kali.delegate(sender.address)
-    expect(await kali.getCurrentVotes(sender.address)).to.equal(getBigNumber(10))
-    expect(await kali.getCurrentVotes(receiver.address)).to.equal(0)
+    await sportsClub.delegate(receiver.address)
+    expect(await sportsClub.getCurrentVotes(sender.address)).to.equal(0)
+    expect(await sportsClub.getCurrentVotes(receiver.address)).to.equal(getBigNumber(10))
+    expect(await sportsClub.balanceOf(sender.address)).to.equal(getBigNumber(10))
+    expect(await sportsClub.balanceOf(receiver.address)).to.equal(0)
+    await sportsClub.delegate(sender.address)
+    expect(await sportsClub.getCurrentVotes(sender.address)).to.equal(getBigNumber(10))
+    expect(await sportsClub.getCurrentVotes(receiver.address)).to.equal(0)
   })
   it("Should update delegated balance after transfer", async function () {
     let sender, receiver, receiver2
     ;[sender, receiver, receiver2] = await ethers.getSigners()
 
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -1509,23 +1510,23 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.delegate(receiver.address)
-    expect(await kali.getCurrentVotes(sender.address)).to.equal(0)
-    expect(await kali.getCurrentVotes(receiver.address)).to.equal(getBigNumber(10))
-    await kali.transfer(receiver2.address, getBigNumber(5))
-    expect(await kali.getCurrentVotes(receiver2.address)).to.equal(getBigNumber(5))
-    expect(await kali.getCurrentVotes(sender.address)).to.equal(0)
-    expect(await kali.getCurrentVotes(receiver.address)).to.equal(getBigNumber(5))
-    await kali.delegate(sender.address)
-    expect(await kali.getCurrentVotes(sender.address)).to.equal(getBigNumber(5))
+    await sportsClub.delegate(receiver.address)
+    expect(await sportsClub.getCurrentVotes(sender.address)).to.equal(0)
+    expect(await sportsClub.getCurrentVotes(receiver.address)).to.equal(getBigNumber(10))
+    await sportsClub.transfer(receiver2.address, getBigNumber(5))
+    expect(await sportsClub.getCurrentVotes(receiver2.address)).to.equal(getBigNumber(5))
+    expect(await sportsClub.getCurrentVotes(sender.address)).to.equal(0)
+    expect(await sportsClub.getCurrentVotes(receiver.address)).to.equal(getBigNumber(5))
+    await sportsClub.delegate(sender.address)
+    expect(await sportsClub.getCurrentVotes(sender.address)).to.equal(getBigNumber(5))
   })
   it("Should update delegated balance after pull transfer (transferFrom)", async function () {
     let sender, receiver, receiver2
     ;[sender, receiver, receiver2] = await ethers.getSigners()
 
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       false,
       [],
@@ -1535,21 +1536,21 @@ describe("KaliDAO", function () {
       30,
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
-    await kali.delegate(receiver.address)
-    expect(await kali.getCurrentVotes(sender.address)).to.equal(0)
-    expect(await kali.getCurrentVotes(receiver.address)).to.equal(getBigNumber(10))
-    await kali.approve(receiver.address, getBigNumber(5))
-    await kali.connect(receiver).transferFrom(sender.address, receiver2.address, getBigNumber(5))
-    expect(await kali.getCurrentVotes(receiver2.address)).to.equal(getBigNumber(5))
-    expect(await kali.getCurrentVotes(sender.address)).to.equal(0)
-    expect(await kali.getCurrentVotes(receiver.address)).to.equal(getBigNumber(5))
-    await kali.delegate(sender.address)
-    expect(await kali.getCurrentVotes(sender.address)).to.equal(getBigNumber(5))
+    await sportsClub.delegate(receiver.address)
+    expect(await sportsClub.getCurrentVotes(sender.address)).to.equal(0)
+    expect(await sportsClub.getCurrentVotes(receiver.address)).to.equal(getBigNumber(10))
+    await sportsClub.approve(receiver.address, getBigNumber(5))
+    await sportsClub.connect(receiver).transferFrom(sender.address, receiver2.address, getBigNumber(5))
+    expect(await sportsClub.getCurrentVotes(receiver2.address)).to.equal(getBigNumber(5))
+    expect(await sportsClub.getCurrentVotes(sender.address)).to.equal(0)
+    expect(await sportsClub.getCurrentVotes(receiver.address)).to.equal(getBigNumber(5))
+    await sportsClub.delegate(sender.address)
+    expect(await sportsClub.getCurrentVotes(sender.address)).to.equal(getBigNumber(5))
   })
   it("permit should work if the signature is valid", async () => {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1560,10 +1561,10 @@ describe("KaliDAO", function () {
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
     const domain = {
-      name: "KALI",
+      name: "SPORTSCLUB",
       version: "1",
       chainId: 31337,
-      verifyingContract: kali.address,
+      verifyingContract: sportsClub.address,
     }
     const types = {
       Permit: [
@@ -1585,38 +1586,38 @@ describe("KaliDAO", function () {
     const signature = await proposer._signTypedData(domain, types, value)
     const { r, s, v } = ethers.utils.splitSignature(signature)
     
-    await kali.permit(proposer.address, bob.address, getBigNumber(1), 1941543121, v, r, s)
+    await sportsClub.permit(proposer.address, bob.address, getBigNumber(1), 1941543121, v, r, s)
 
     // Unpause to unblock transferFrom
-    await kali.propose(7, "TEST", [proposer.address], [0], [0x00])
-    await kali.vote(1, true)
+    await sportsClub.propose(7, "TEST", [proposer.address], [0], [0x00])
+    await sportsClub.vote(1, true)
     await advanceTime(35)
-    await kali.processProposal(1)
-    expect(await kali.paused()).to.equal(false)
+    await sportsClub.processProposal(1)
+    expect(await sportsClub.paused()).to.equal(false)
 
     // console.log(
     //   "Proposer's balance before delegation: ",
-    //   await kali.balanceOf(proposer.address)
+    //   await sportsClub.balanceOf(proposer.address)
     // )
     // console.log(
     //   "Bob's balance before delegation: ",
-    //   await kali.balanceOf(bob.address)
+    //   await sportsClub.balanceOf(bob.address)
     // )
-    await kali.connect(bob).transferFrom(proposer.address, bob.address, getBigNumber(1))
+    await sportsClub.connect(bob).transferFrom(proposer.address, bob.address, getBigNumber(1))
     // console.log(
     //   "Proposer's balance after delegation: ",
-    //   await kali.balanceOf(proposer.address)
+    //   await sportsClub.balanceOf(proposer.address)
     // )
     // console.log(
     //   "Bob's balance after delegation: ",
-    //   await kali.balanceOf(bob.address)
+    //   await sportsClub.balanceOf(bob.address)
     // )
-    expect(await kali.balanceOf(bob.address)).to.equal(getBigNumber(1))
+    expect(await sportsClub.balanceOf(bob.address)).to.equal(getBigNumber(1))
   })
   it("permit should revert if the signature is invalid", async () => {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1628,13 +1629,13 @@ describe("KaliDAO", function () {
     )
     const rs = ethers.utils.formatBytes32String("rs")
     expect(
-      kali.permit(proposer.address, bob.address, getBigNumber(1), 1941525801, 0, rs, rs).should.be.reverted
+      sportsClub.permit(proposer.address, bob.address, getBigNumber(1), 1941525801, 0, rs, rs).should.be.reverted
     )
   })
   it("delegateBySig should work if the signature is valid", async () => {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1645,10 +1646,10 @@ describe("KaliDAO", function () {
       [30, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     )
     const domain = {
-      name: "KALI",
+      name: "SPORTSCLUB",
       version: "1",
       chainId: 31337,
-      verifyingContract: kali.address,
+      verifyingContract: sportsClub.address,
     }
     const types = {
       Delegation: [
@@ -1666,12 +1667,12 @@ describe("KaliDAO", function () {
     const signature = await proposer._signTypedData(domain, types, value)
     const { r, s, v } = ethers.utils.splitSignature(signature)
 
-    kali.delegateBySig(bob.address, 0, 1941525801, v, r, s)
+    sportsClub.delegateBySig(bob.address, 0, 1941525801, v, r, s)
   })
   it("delegateBySig should revert if the signature is invalid", async () => {
-    await kali.init(
-      "KALI",
-      "KALI",
+    await sportsClub.init(
+      "SPORTSCLUB",
+      "SPORTSCLUB",
       "DOCS",
       true,
       [],
@@ -1683,7 +1684,7 @@ describe("KaliDAO", function () {
     )
     const rs = ethers.utils.formatBytes32String("rs")
     expect(
-      kali.delegateBySig(bob.address, 0, 1941525801, 0, rs, rs).should.be.reverted
+      sportsClub.delegateBySig(bob.address, 0, 1941525801, 0, rs, rs).should.be.reverted
     )
   })
 })

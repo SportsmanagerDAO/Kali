@@ -7,20 +7,20 @@ const Button = {
   },
   variants: {
     outline: (props) => ({
-      bg: props.colorMode === "dark" ? "kali.700" : "kali.900",
-      color: props.colorMode === "dark" ? "kali.900" : "kali.800",
+      bg: props.colorMode === "dark" ? "sportsClubDao.700" : "sportsClubDao.900",
+      color: props.colorMode === "dark" ? "sportsClubDao.900" : "sportsClubDao.800",
     }),
     ghost: (props) => ({
       bg: props.colorMode === "dark" ? null : null,
-      color: props.colorMode === "dark" ? "kali.900" : "kali.800",
+      color: props.colorMode === "dark" ? "sportsClubDao.900" : "sportsClubDao.800",
     }),
     solid: (props) => ({
-      bg: props.colorMode === "dark" ? "kali.700" : "kali.900",
-      color: props.colorMode === "dark" ? "kali.900" : "kali.800",
+      bg: props.colorMode === "dark" ? "sportsClubDao.700" : "sportsClubDao.900",
+      color: props.colorMode === "dark" ? "sportsClubDao.900" : "sportsClubDao.800",
     }),
   },
   defaultProps: {
-    colorScheme: "kali",
+    colorScheme: "sportsClubDao",
   },
 };
 

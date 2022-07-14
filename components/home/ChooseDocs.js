@@ -55,15 +55,15 @@ export default function ChooseDocs(props) {
   const templateOptions = () => [
     {
       name: "DAO Charter",
-      url: "https://github.com/lexDAO/Kali/blob/main/legal/formation/Charter.md",
+      url: "https://github.com/SportsManagerDAO/Kali/blob/main/legal/formation/Charter.md",
     },
     {
       name: "Trustless Unincorporated Nonprofit Association Agreement",
-      url: "https://github.com/lexDAO/Kali/blob/main/legal/formation/una/TUNAA.md",
+      url: "https://github.com/SportsManagerDAO/Kali/blob/main/legal/formation/una/TUNAA.md",
     },
     {
       name: "Delaware LLC Operating Agreement",
-      url: "https://github.com/lexDAO/Kali/blob/main/legal/formation/llc/DelawareOA.md",
+      url: "https://github.com/SportsManagerDAO/Kali/blob/main/legal/formation/llc/DelawareOA.md",
     },
   ];
 
@@ -94,7 +94,7 @@ export default function ChooseDocs(props) {
             target="_blank"
             isExternal
             rel="noopener noreferrer"
-            color="kali.600"
+            color="sportsClubDao.600"
           >
             here
           </Link>

@@ -2,7 +2,7 @@ import { Box, Link, IconButton, Text, Heading } from "@chakra-ui/react";
 import { AiFillHome } from "react-icons/ai";
 import { routeHome } from "../../utils/router";
 
-export default function Kali() {
+export default function SportsClub() {
   const home = () => {
     routeHome();
     console.log("click");
@@ -10,11 +10,11 @@ export default function Kali() {
   return (
     <>
       <Heading
-        id="kali-logo"
+        id="sports-club-dao-logo"
         letterSpacing="wide"
         fontWeight="extrabold"
       >
-        <Link onClick={home}>KaliDAO</Link>
+        <Link onClick={home}>SportsClubDAO</Link>
       </Heading>
     </>
   );
