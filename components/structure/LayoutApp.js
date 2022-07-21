@@ -4,7 +4,7 @@ import { Container, HStack, Center, Spacer } from "@chakra-ui/react";
 import Head from "next/head";
 import NavRightContainer from "./NavRightContainer";
 import SportsClub from "./SportsClub";
-import KaliIcon from "../elements/KaliIcon";
+import SportsClubIcon from "../elements/SportsClubIcon";
 import ActionMenu from "./ActionMenu";
 import LoadingIndicator from "./Loading";
 import Footer from "./Footer";
@@ -16,7 +16,7 @@ export default function Layout(props) {
     <>
       {loading == true ? <LoadingIndicator /> : ""}
       <Head>
-        <title>KaliDAO</title>
+        <title>SportsClubDAO</title>
         <meta
           property="og:title"
           content="optimized DAC protocol"
@@ -34,7 +34,7 @@ export default function Layout(props) {
         maxW='300px'
         width={{sm: '200px', md: '250px', lg: '250px'}}
       >
-          <Center><KaliIcon /></Center>
+          <Center><SportsClubIcon /></Center>
           <ActionMenu />
       </Container>
       <Container

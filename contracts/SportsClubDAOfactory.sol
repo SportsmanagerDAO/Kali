@@ -2,13 +2,13 @@
 
 pragma solidity >=0.8.4;
 
-import './KaliDAO.sol';
+import './SportsClubDAO.sol';
 import './interfaces/IRicardianLLC.sol';
 
-/// @notice Factory to deploy Kali DAO.
-contract KaliDAOfactory is Multicall {
+/// @notice Factory to deploy SportsClub DAO.
+contract SportsClubDAOfactory is Multicall {
     event DAOdeployed(
-        KaliDAO indexed kaliDAO, 
+        SportsClubDAO indexed SportsClubDAO, 
         string name, 
         string symbol, 
         string docs, 
@@ -33,7 +33,7 @@ contract KaliDAOfactory is Multicall {
         ricardianLLC = ricardianLLC_;
     }
     
-    function deployKaliDAO(
+    function deploySportsClubDAO(
         string memory name_,
         string memory symbol_,
         string memory docs_,
@@ -44,10 +44,10 @@ contract KaliDAOfactory is Multicall {
         uint256[] calldata shares_,
         uint32 votingPeriod_,
         uint8[13] memory govSettings_
-    ) public payable virtual returns (KaliDAO kaliDAO) {
-        kaliDAO = KaliDAO(_cloneAsMinimalProxy(kaliMaster, name_));
+    ) public payable virtual returns (SportsClubDAO SportsClubDAO) {
+        SportsClubDAO = SportsClubDAO(_cloneAsMinimalProxy(kaliMaster, name_));
         
-        kaliDAO.init{value: msg.value}(
+        SportsClubDAO.init{value: msg.value}(
             name_, 
             symbol_, 
             docs_,
@@ -63,10 +63,10 @@ contract KaliDAOfactory is Multicall {
         bytes memory docs = bytes(docs_);
 
         if (docs.length == 0) {
-            ricardianLLC.mintLLC(address(kaliDAO));
+            ricardianLLC.mintLLC(address(SportsClubDAO));
         }
 
-        emit DAOdeployed(kaliDAO, name_, symbol_, docs_, paused_, extensions_, extensionsData_, voters_, shares_, votingPeriod_, govSettings_);
+        emit DAOdeployed(SportsClubDAO, name_, symbol_, docs_, paused_, extensions_, extensionsData_, voters_, shares_, votingPeriod_, govSettings_);
     }
 
     /// @dev modified from Aelin (https://github.com/AelinXYZ/aelin/blob/main/contracts/MinimalProxyFactory.sol)

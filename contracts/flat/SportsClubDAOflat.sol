@@ -5,7 +5,7 @@ pragma solidity >=0.8.4;
 /// @notice Modern and gas-optimized ERC-20 + EIP-2612 implementation with COMP-style governance and pausing.
 /// @author Modified from RariCapital (https://github.com/Rari-Capital/solmate/blob/main/src/erc20/ERC20.sol)
 /// License-Identifier: AGPL-3.0-only
-abstract contract KaliDAOtoken {
+abstract contract SportsClubDAOtoken {
     /*///////////////////////////////////////////////////////////////
                             EVENTS
     //////////////////////////////////////////////////////////////*/
@@ -522,8 +522,8 @@ abstract contract ReentrancyGuard {
     }
 }
 
-/// @notice Kali DAO membership extension interface.
-interface IKaliDAOextension {
+/// @notice SportsClub DAO membership extension interface.
+interface ISportsClubDAOextension {
     function setExtension(bytes calldata extensionData) external;
 
     function callExtension(
@@ -533,8 +533,8 @@ interface IKaliDAOextension {
     ) external payable returns (bool mint, uint256 amountOut);
 }
 
-/// @notice Simple gas-optimized Kali DAO core module.
-contract KaliDAOflat is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
+/// @notice Simple gas-optimized SportsClub DAO core module.
+contract SportsClubDAOflat is SportsClubDAOtoken, Multicall, NFThelper, ReentrancyGuard {
     /*///////////////////////////////////////////////////////////////
                             EVENTS
     //////////////////////////////////////////////////////////////*/
@@ -677,7 +677,7 @@ contract KaliDAOflat is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
 
         if (govSettings_[1] <= 51 || govSettings_[1] > 100) revert SupermajorityBounds();
 
-        KaliDAOtoken._init(name_, symbol_, paused_, voters_, shares_);
+        SportsClubDAOtoken._init(name_, symbol_, paused_, voters_, shares_);
 
         if (extensions_.length != 0) {
             // cannot realistically overflow on human timescales
@@ -685,7 +685,7 @@ contract KaliDAOflat is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
                 for (uint256 i; i < extensions_.length; i++) {
                     extensions[extensions_[i]] = true;
 
-                    if (extensionsData_[i].length != 0) IKaliDAOextension(extensions_[i])
+                    if (extensionsData_[i].length != 0) ISportsClubDAOextension(extensions_[i])
                         .setExtension(extensionsData_[i]);
                 }
             }
@@ -869,7 +869,7 @@ contract KaliDAOflat is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
         uint96 weight = getPriorVotes(signer, prop.creationTime);
         
         // this is safe from overflow because `yesVotes` and `noVotes` are capped by `totalSupply`
-        // which is checked for overflow in `KaliDAOtoken` contract
+        // which is checked for overflow in `SportsClubDAOtoken` contract
         unchecked { 
             if (approve) {
                 prop.yesVotes += weight;
@@ -950,7 +950,7 @@ contract KaliDAOflat is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
                         if (prop.amounts[i] != 0) 
                             extensions[prop.accounts[i]] = !extensions[prop.accounts[i]];
                     
-                        if (prop.payloads[i].length != 0) IKaliDAOextension(prop.accounts[i])
+                        if (prop.payloads[i].length != 0) ISportsClubDAOextension(prop.accounts[i])
                             .setExtension(prop.payloads[i]);
                     }
                 
@@ -984,7 +984,7 @@ contract KaliDAOflat is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
             uint256 minVotes = (totalSupply * quorum) / 100;
             
             // this is safe from overflow because `yesVotes` and `noVotes` 
-            // supply are checked in `KaliDAOtoken` contract
+            // supply are checked in `SportsClubDAOtoken` contract
             unchecked {
                 uint256 votes = yesVotes + noVotes;
 
@@ -1026,7 +1026,7 @@ contract KaliDAOflat is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
             mint = abi.decode(extensionData, (bool));
         } else {
             account = msg.sender;
-            (mint, amountOut) = IKaliDAOextension(extension).callExtension{value: msg.value}
+            (mint, amountOut) = ISportsClubDAOextension(extension).callExtension{value: msg.value}
                 (msg.sender, amount, extensionData);
         }
         

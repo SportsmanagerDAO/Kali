@@ -2,14 +2,14 @@
 
 pragma solidity >=0.8.4;
 
-import './KaliDAOtoken.sol';
+import './SportsClubDAOtoken.sol';
 import './utils/Multicall.sol';
 import './utils/NFThelper.sol';
 import './utils/ReentrancyGuard.sol';
-import './interfaces/IKaliDAOextension.sol';
+import './interfaces/ISportsClubDAOextension.sol';
 
-/// @notice Simple gas-optimized Kali DAO core module.
-contract KaliDAO is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
+/// @notice Simple gas-optimized SportsClub DAO core module.
+contract SportsClubDAO is SportsClubDAOtoken, Multicall, NFThelper, ReentrancyGuard {
     /*///////////////////////////////////////////////////////////////
                             EVENTS
     //////////////////////////////////////////////////////////////*/
@@ -154,7 +154,7 @@ contract KaliDAO is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
 
         if (govSettings_[1] <= 51 || govSettings_[1] > 100) revert SupermajorityBounds();
 
-        KaliDAOtoken._init(name_, symbol_, paused_, voters_, shares_);
+        SportsClubDAOtoken._init(name_, symbol_, paused_, voters_, shares_);
 
         if (extensions_.length != 0) {
             // cannot realistically overflow on human timescales
@@ -349,7 +349,7 @@ contract KaliDAO is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
         uint96 weight = getPriorVotes(signer, prop.creationTime);
         
         // this is safe from overflow because `yesVotes` and `noVotes` are capped by `totalSupply`
-        // which is checked for overflow in `KaliDAOtoken` contract
+        // which is checked for overflow in `SportsClubDAOtoken` contract
         unchecked { 
             if (approve) {
                 prop.yesVotes += weight;
@@ -430,7 +430,7 @@ contract KaliDAO is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
                         if (prop.amounts[i] != 0) 
                             extensions[prop.accounts[i]] = !extensions[prop.accounts[i]];
                     
-                        if (prop.payloads[i].length != 0) IKaliDAOextension(prop.accounts[i])
+                        if (prop.payloads[i].length != 0) ISportsClubDAOextension(prop.accounts[i])
                             .setExtension(prop.payloads[i]);
                     }
                 
@@ -464,7 +464,7 @@ contract KaliDAO is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
             uint256 minVotes = (totalSupply * quorum) / 100;
             
             // this is safe from overflow because `yesVotes` and `noVotes` 
-            // supply are checked in `KaliDAOtoken` contract
+            // supply are checked in `SportsClubDAOtoken` contract
             unchecked {
                 uint256 votes = yesVotes + noVotes;
 
@@ -506,7 +506,7 @@ contract KaliDAO is KaliDAOtoken, Multicall, NFThelper, ReentrancyGuard {
             mint = abi.decode(extensionData, (bool));
         } else {
             account = msg.sender;
-            (mint, amountOut) = IKaliDAOextension(extension).callExtension{value: msg.value}
+            (mint, amountOut) = ISportsClubDAOextension(extension).callExtension{value: msg.value}
                 (msg.sender, amount, extensionData);
         }
         

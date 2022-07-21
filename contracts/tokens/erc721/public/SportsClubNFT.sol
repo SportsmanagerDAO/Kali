@@ -4,8 +4,8 @@ pragma solidity >=0.8.4;
 
 import '../ERC721.sol';
 
-/// @notice Public NFT minter for Kali DAO.
-abstract contract KaliNFT is ERC721 {
+/// @notice Public NFT minter for SportsClub DAO.
+abstract contract SportsClubNFT is ERC721 {
     constructor(string memory name_, string memory symbol_) ERC721(name_, symbol_) {}
     
     function mint(address to, uint256 tokenId) external { 

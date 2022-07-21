@@ -4,10 +4,10 @@ pragma solidity >=0.8.4;
 
 import '../utils/Multicall.sol';
 
-/// @notice Kali DAO whitelist manager.
+/// @notice SportsClub DAO whitelist manager.
 /// @author Modified from SushiSwap 
 /// (https://github.com/sushiswap/trident/blob/master/contracts/pool/franchised/WhiteListManager.sol)
-contract KaliWhitelistManager {
+contract SportsClubWhitelistManager {
     /*///////////////////////////////////////////////////////////////
                             EVENTS
     //////////////////////////////////////////////////////////////*/
@@ -84,7 +84,7 @@ contract KaliWhitelistManager {
             keccak256(
                 abi.encode(
                     keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'),
-                    keccak256(bytes('KaliWhitelistManager')),
+                    keccak256(bytes('SportsClubWhitelistManager')),
                     keccak256('1'),
                     block.chainid,
                     address(this)

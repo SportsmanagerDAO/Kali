@@ -26,7 +26,7 @@ export default function Footer() {
           className="social"
           rounded={"full"}
           as={"a"}
-          href={"https://twitter.com/_KaliDAO"}
+          href={"https://twitter.com/_SportsClubDAO"}
           target="_blank"
         >
           <BsTwitter />
@@ -35,7 +35,7 @@ export default function Footer() {
           className="social"
           rounded={"full"}
           as={"a"}
-          href={"https://github.com/lexDAO/Kali"}
+          href={"https://github.com/lexDAO/SportsClub"}
           target="_blank"
         >
           <BsGithub />

@@ -55,15 +55,15 @@ export default function ChooseDocs(props) {
   const templateOptions = () => [
     {
       name: "DAO Charter",
-      url: "https://github.com/SportsManagerDAO/Kali/blob/main/legal/formation/Charter.md",
+      url: "https://github.com/SportsManagerDAO/SportsClub/blob/main/legal/formation/Charter.md",
     },
     {
       name: "Trustless Unincorporated Nonprofit Association Agreement",
-      url: "https://github.com/SportsManagerDAO/Kali/blob/main/legal/formation/una/TUNAA.md",
+      url: "https://github.com/SportsManagerDAO/SportsClub/blob/main/legal/formation/una/TUNAA.md",
     },
     {
       name: "Delaware LLC Operating Agreement",
-      url: "https://github.com/SportsManagerDAO/Kali/blob/main/legal/formation/llc/DelawareOA.md",
+      url: "https://github.com/SportsManagerDAO/SportsClub/blob/main/legal/formation/llc/DelawareOA.md",
     },
   ];
 
@@ -87,7 +87,7 @@ export default function ChooseDocs(props) {
         <HStack>
         <Icon as={AiOutlineInfoCircle} />
         <Text as="i">
-          Your DAO will be issued a series NFT under KaliCo Ricardian LLC, a
+          Your DAO will be issued a series NFT under SportsClubCo Ricardian LLC, a
           Delaware Series LLC. Click{" "}
           <Link
             href="https://ricardian.gitbook.io/ricardian-llc/"
