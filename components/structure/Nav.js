@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Flex, Spacer, HStack } from "@chakra-ui/react";
 import NavRightContainer from "./NavRightContainer";
 import Hamburger from "./Hamburger";
-import Kali from "./Kali";
-import KaliMobile from "./KaliMobile";
+import SportsClub from "./SportsClub";
+import SportsClubMobile from "./SportsClubMobile";
 import Account from "./Account";
 import Chain from "./Chain";
 
@@ -15,7 +15,7 @@ export default function Nav() {
   const { account, chainId } = value.state;
   return (
     <HStack id="nav">
-      {isBrowser == true ? <Kali /> : null}
+      {isBrowser == true ? <SportsClub /> : null}
       <Spacer />
       <NavRightContainer />
     </HStack>

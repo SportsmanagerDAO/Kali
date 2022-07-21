@@ -4,7 +4,7 @@ import AppContext from "../../context/AppContext";
 import Link from "next/link";
 import { Flex, Spacer, HStack } from "@chakra-ui/react";
 import Hamburger from "./Hamburger";
-import Kali from "./Kali";
+import SportsClub from "./SportsClub";
 import Account from "./Account";
 import Chain from "./Chain";
 

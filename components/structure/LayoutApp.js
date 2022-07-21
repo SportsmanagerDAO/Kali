@@ -3,7 +3,7 @@ import AppContext from "../../context/AppContext";
 import { Container, HStack, Center, Spacer } from "@chakra-ui/react";
 import Head from "next/head";
 import NavRightContainer from "./NavRightContainer";
-import Kali from "./Kali";
+import SportsClub from "./SportsClub";
 import KaliIcon from "../elements/KaliIcon";
 import ActionMenu from "./ActionMenu";
 import LoadingIndicator from "./Loading";
