@@ -44,10 +44,10 @@ contract SportsClubDAOfactory is Multicall {
         uint256[] calldata shares_,
         uint32 votingPeriod_,
         uint8[13] memory govSettings_
-    ) public payable virtual returns (SportsClubDAO SportsClubDAO) {
-        SportsClubDAO = SportsClubDAO(_cloneAsMinimalProxy(sportsClubMaster, name_));
+    ) public payable virtual returns (SportsClubDAO _SportsClubDAO) {
+        _SportsClubDAO = SportsClubDAO(_cloneAsMinimalProxy(sportsClubMaster, name_));
         
-        SportsClubDAO.init{value: msg.value}(
+        _SportsClubDAO.init{value: msg.value}(
             name_, 
             symbol_, 
             docs_,
@@ -63,10 +63,10 @@ contract SportsClubDAOfactory is Multicall {
         bytes memory docs = bytes(docs_);
 
         if (docs.length == 0) {
-            ricardianLLC.mintLLC(address(SportsClubDAO));
+            ricardianLLC.mintLLC(address(_SportsClubDAO));
         }
 
-        emit DAOdeployed(SportsClubDAO, name_, symbol_, docs_, paused_, extensions_, extensionsData_, voters_, shares_, votingPeriod_, govSettings_);
+        emit DAOdeployed(_SportsClubDAO, name_, symbol_, docs_, paused_, extensions_, extensionsData_, voters_, shares_, votingPeriod_, govSettings_);
     }
 
     /// @dev modified from Aelin (https://github.com/AelinXYZ/aelin/blob/main/contracts/MinimalProxyFactory.sol)
