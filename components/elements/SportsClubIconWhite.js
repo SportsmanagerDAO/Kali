@@ -29,7 +29,7 @@ const SVG = (props) => {
   )
 }
 
-const KaliIconWhite = (props) => {
+const SportsClubIconWhite = (props) => {
   return(
     <Icon
       className="transparent-btn"
@@ -38,4 +38,4 @@ const KaliIconWhite = (props) => {
   )
 }
 
-export default KaliIconWhite;
+export default SportsClubIconWhite;

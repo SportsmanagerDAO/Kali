@@ -23,12 +23,12 @@ contract SportsClubDAOfactory is Multicall {
 
     error NullDeploy();
 
-    address payable public immutable kaliMaster;
+    address payable public immutable sportsClubMaster;
 
     IRicardianLLC public immutable ricardianLLC;
 
-    constructor(address payable kaliMaster_, IRicardianLLC ricardianLLC_) {
-        kaliMaster = kaliMaster_;
+    constructor(address payable sportsClubMaster_, IRicardianLLC ricardianLLC_) {
+        sportsClubMaster = sportsClubMaster_;
 
         ricardianLLC = ricardianLLC_;
     }
@@ -45,7 +45,7 @@ contract SportsClubDAOfactory is Multicall {
         uint32 votingPeriod_,
         uint8[13] memory govSettings_
     ) public payable virtual returns (SportsClubDAO SportsClubDAO) {
-        SportsClubDAO = SportsClubDAO(_cloneAsMinimalProxy(kaliMaster, name_));
+        SportsClubDAO = SportsClubDAO(_cloneAsMinimalProxy(sportsClubMaster, name_));
         
         SportsClubDAO.init{value: msg.value}(
             name_, 

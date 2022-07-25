@@ -3,12 +3,12 @@
 pragma solidity >=0.8.4;
 
 import '../../libraries/SafeTransferLib.sol';
-import '../../interfaces/IKaliDAOextension.sol';
-import '../../interfaces/IKaliWhitelistManager.sol';
+import '../../interfaces/ISportsClubDAOextension.sol';
+import '../../interfaces/ISportsClubWhitelistManager.sol';
 import '../../utils/ReentrancyGuard.sol';
 
 /// @notice Crowdsale contract that receives ETH or tokens to mint registered DAO tokens, including merkle whitelisting.
-contract KaliDAOcrowdsale is ReentrancyGuard {
+contract SportsClubDAOcrowdsale is ReentrancyGuard {
     using SafeTransferLib for address;
 
     event ExtensionSet(address dao, uint256 listId, address purchaseToken, uint8 purchaseMultiplier, uint96 purchaseLimit, uint32 saleEnds);
@@ -23,7 +23,7 @@ contract KaliDAOcrowdsale is ReentrancyGuard {
 
     error PurchaseLimit();
     
-    IKaliWhitelistManager public immutable whitelistManager;
+    ISportsClubWhitelistManager public immutable whitelistManager;
 
     mapping(address => Crowdsale) public crowdsales;
 
@@ -36,7 +36,7 @@ contract KaliDAOcrowdsale is ReentrancyGuard {
         uint32 saleEnds;
     }
 
-    constructor(IKaliWhitelistManager whitelistManager_) {
+    constructor(ISportsClubWhitelistManager whitelistManager_) {
         whitelistManager = whitelistManager_;
     }
 
@@ -78,7 +78,7 @@ contract KaliDAOcrowdsale is ReentrancyGuard {
 
             sale.amountPurchased += uint96(amountOut);
 
-            IKaliDAOextension(dao).callExtension(msg.sender, amountOut, extensionData);
+            ISportsClubDAOextension(dao).callExtension(msg.sender, amountOut, extensionData);
         } else {
             // send tokens to DAO
             sale.purchaseToken._safeTransferFrom(msg.sender, dao, amount);
@@ -89,7 +89,7 @@ contract KaliDAOcrowdsale is ReentrancyGuard {
 
             sale.amountPurchased += uint96(amountOut);
 
-            IKaliDAOextension(dao).callExtension(msg.sender, amountOut, extensionData);
+            ISportsClubDAOextension(dao).callExtension(msg.sender, amountOut, extensionData);
         }
 
         emit ExtensionCalled(msg.sender, dao, amountOut);

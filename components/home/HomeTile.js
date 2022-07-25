@@ -1,7 +1,7 @@
 import { Button, Box, Text, VStack, HStack, Image, Divider } from "@chakra-ui/react";
 import ContactForm from "../elements/ContactForm";
 import FlexGradient from "../elements/FlexGradient";
-import KaliButton from "../elements/KaliButton";
+import SportsClubButton from "../elements/SportsClubButton";
 
 export default function HomeTile(props) {
   return (
@@ -15,7 +15,7 @@ export default function HomeTile(props) {
           <Text fontSize="md">
             <i>form an LLC or UNA in minutes</i>
           </Text>
-          <KaliButton onClick={props.setDeployerVisible}>Create DAO</KaliButton>
+          <SportsClubButton onClick={props.setDeployerVisible}>Create DAO</SportsClubButton>
           {/* <ContactForm /> */}
         </VStack>
       </HStack>

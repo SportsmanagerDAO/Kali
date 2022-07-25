@@ -1,10 +1,10 @@
-Kali FAQ – The Summoning - Setting Up Your KaliDAO - Getting a Handle on the Hands
+SportsClub FAQ – The Summoning - Setting Up Your SportsClubDAO - Getting a Handle on the Hands
 
-1.  What is Kali?
+1.  What is SportsClub?
 
-Kali is a protocol for the smooth and straightforward establishment of a DAO operating under MolochDAO/Compound style governance. With just a few decisions and clicks, users can establish a flexible and user-friendly org that has a core functionality adequate for both large and small DAOs. Uniquely, Kali has the ability to 'wrap' the established DAO in a legal wrapper under either a Wyoming or Delaware LLC (Limited Liability Company) (in alpha). Kali also provides the options of drafting a 'boilerplate' Community Code of Conduct that your DAO can then expand upon, as well as a Charter. Lastly, Kali provides the option of establishing a UNA (Unincorporated Nonprofit Association) instead of an LLC.
+SportsClub is a protocol for the smooth and straightforward establishment of a DAO operating under MolochDAO/Compound style governance. With just a few decisions and clicks, users can establish a flexible and user-friendly org that has a core functionality adequate for both large and small DAOs. Uniquely, SportsClub has the ability to 'wrap' the established DAO in a legal wrapper under either a Wyoming or Delaware LLC (Limited Liability Company) (in alpha). SportsClub also provides the options of drafting a 'boilerplate' Community Code of Conduct that your DAO can then expand upon, as well as a Charter. Lastly, SportsClub provides the option of establishing a UNA (Unincorporated Nonprofit Association) instead of an LLC.
 
-2.  What things should I be thinking about when I set up a KaliDAO?
+2.  What things should I be thinking about when I set up a SportsClubDAO?
 
 The more consideration as to the needs and structure of your DAO at the time of establishment, the fewer changes may be required in the future (which may reduce gas fees required to make subsequent changes to your DAO).
 
@@ -12,13 +12,13 @@ The most important considerations to make (other than your name and symbol!) are
 - Who are the founders?;
 - How many tokens are each of those founders initially receiving?;
 - What voting procedures should the DAO operate by?; and
-- Do you want to establish the DAO with a legal wrapper (more on this later)? <b>KaliDAO and LexDAO recommend that you discuss this decision with a legal and tax expert prior to establishing the DAO</b>.
+- Do you want to establish the DAO with a legal wrapper (more on this later)? <b>SportsClubDAO and LexDAO recommend that you discuss this decision with a legal and tax expert prior to establishing the DAO</b>.
 
 3.  Setting up your DAO:
 
 <b>Step 1</b> - Where to deploy your DAO?
 
-Kali is currently deployed to the following networks. Some networks may provide security, speed, and fee advantages. Kali DAOs are currently deployable on:
+SportsClub is currently deployed to the following networks. Some networks may provide security, speed, and fee advantages. SportsClub DAOs are currently deployable on:
 -Ethereum Mainnet
 -Arbitrum One
 -Polygon
@@ -26,7 +26,7 @@ Kali is currently deployed to the following networks. Some networks may provide 
 
 <b>Step 2</b> - Choose your DAO's name and Symbol.
 
-<b>Step 3</b> - Choose a DAO governance structure from Kali pre-set templates or customize your governance settings.
+<b>Step 3</b> - Choose a DAO governance structure from SportsClub pre-set templates or customize your governance settings.
 
 <u>KALI Templates</u>
 
@@ -58,4 +58,4 @@ Input the addresses for each of the founders. <b>Be sure to use the addresses fr
 
 The content of this website has been prepared for informational purposes only and does not constitute legal advice. The information on this website shall not be construed as an offer to represent you, nor is it intended to create, nor shall the receipt of such information constitute, an attorney-client relationship. We hope that you will find the information informative and useful, and we would be delighted to speak with you to answer any questions you may have.
 
-<u>Kali core contributors include Shivanshi Tyagi, Jordan Teague, and Ross Campbell. It is supported by the friendly shadowy super lawyers at LexDAO (https://www.lexdao.coop/).</u>
+<u>SportsClub core contributors include Shivanshi Tyagi, Jordan Teague, and Ross Campbell. It is supported by the friendly shadowy super lawyers at LexDAO (https://www.lexdao.coop/).</u>

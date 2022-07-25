@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import kaliToken from "../../eth/kaliToken";
+import sportsClubToken from "../../eth/sportsClubToken";
 import { Button } from "@chakra-ui/react";
 import FlexGradient from "../elements/FlexGradient";
 import { Formik, Form } from "formik";
@@ -18,12 +18,12 @@ function TokenForm(props) {
     const { name, symbol, supply } = values;
 
     try {
-      let result = await kaliToken.methods
+      let result = await sportsClubToken.methods
         .deployFixedERC20(name, symbol, 18, dao, web3.utils.toWei(supply))
         .send({ from: account });
 
       console.log("This is the result", result);
-      // let dao = result["events"]["DAOdeployed"]["returnValues"]["kaliDAO"];
+      // let dao = result["events"]["DAOdeployed"]["returnValues"]["sportsClubDAO"];
 
       // Router.push({
       //   pathname: "/daos/[dao]",

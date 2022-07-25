@@ -4,11 +4,11 @@ pragma solidity >=0.8.4;
 
 import '../../libraries/SafeTransferLib.sol';
 import '../../interfaces/IERC20minimal.sol';
-import '../../interfaces/IKaliWhitelistManager.sol';
+import '../../interfaces/ISportsClubWhitelistManager.sol';
 import '../../utils/ReentrancyGuard.sol';
 
 /// @notice Crowdsale contract that receives ETH or tokens to mint registered DAO tokens, including merkle whitelisting.
-contract KaliDAOlinearCurve is ReentrancyGuard {
+contract SportsClubDAOlinearCurve is ReentrancyGuard {
     using SafeTransferLib for address;
 
     event ExtensionSet(
@@ -30,7 +30,7 @@ contract KaliDAOlinearCurve is ReentrancyGuard {
 
     error PurchaseLimit();
     
-    IKaliWhitelistManager public immutable whitelistManager;
+    ISportsClubWhitelistManager public immutable whitelistManager;
 
     mapping(address => Crowdsale) public crowdsales;
 
@@ -44,7 +44,7 @@ contract KaliDAOlinearCurve is ReentrancyGuard {
         uint32 saleEnds;
     }
 
-    constructor(IKaliWhitelistManager whitelistManager_) {
+    constructor(ISportsClubWhitelistManager whitelistManager_) {
         whitelistManager = whitelistManager_;
     }
 

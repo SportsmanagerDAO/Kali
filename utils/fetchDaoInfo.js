@@ -180,7 +180,7 @@ async function fetchExtensions(instance, daoChain, web3, address, balances) {
 // helper functions for main getter function
 
 async function fetchCrowdsale(web3, address, extAddress, balances) {
-  const extAbi = require("../abi/KaliDAOcrowdsale.json");
+  const extAbi = require("../abi/SportsClubDAOcrowdsale.json");
 
   let details;
 
@@ -202,7 +202,7 @@ async function fetchCrowdsale(web3, address, extAddress, balances) {
 }
 
 async function fetchRedemption(web3, address, extAddress, balances) {
-  const extAbi = require("../abi/KaliDAOredemption.json");
+  const extAbi = require("../abi/SportsClubDAOredemption.json");
 
   let details;
 

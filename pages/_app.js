@@ -3,7 +3,7 @@ import AppContext from "../context/AppContext";
 import Web3 from "web3";
 import { useState, useEffect } from "react";
 import theme from "../styles/theme";
-const abi = require("../abi/KaliDAO.json");
+const abi = require("../abi/SportsClubDAO.json");
 import { createToast } from "../utils/toast";
 import { correctNetwork } from "../utils/network";
 import { getNetworkName } from "../utils/formatters";

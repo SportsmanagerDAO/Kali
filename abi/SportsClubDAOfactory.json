@@ -3,7 +3,7 @@
 		"inputs": [
 			{
 				"internalType": "address payable",
-				"name": "kaliMaster_",
+				"name": "sportsClubMaster_",
 				"type": "address"
 			},
 			{
@@ -25,8 +25,8 @@
 		"inputs": [
 			{
 				"indexed": true,
-				"internalType": "contract KaliDAO",
-				"name": "kaliDAO",
+				"internalType": "contract SportsClubDAO",
+				"name": "sportsClubDAO",
 				"type": "address"
 			},
 			{
@@ -146,11 +146,11 @@
 				"type": "uint8[13]"
 			}
 		],
-		"name": "deployKaliDAO",
+		"name": "deploySportsClubDAO",
 		"outputs": [
 			{
-				"internalType": "contract KaliDAO",
-				"name": "kaliDAO",
+				"internalType": "contract SportsClubDAO",
+				"name": "sportsClubDAO",
 				"type": "address"
 			}
 		],
@@ -178,7 +178,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "kaliMaster",
+		"name": "sportsClubMaster",
 		"outputs": [
 			{
 				"internalType": "address payable",

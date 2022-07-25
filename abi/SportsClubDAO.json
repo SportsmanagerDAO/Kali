@@ -1099,7 +1099,7 @@
 	{
 		"inputs": [
 			{
-				"internalType": "enum KaliDAO.ProposalType",
+				"internalType": "enum SportsClubDAO.ProposalType",
 				"name": "",
 				"type": "uint8"
 			}
@@ -1107,7 +1107,7 @@
 		"name": "proposalVoteTypes",
 		"outputs": [
 			{
-				"internalType": "enum KaliDAO.VoteType",
+				"internalType": "enum SportsClubDAO.VoteType",
 				"name": "",
 				"type": "uint8"
 			}
@@ -1126,7 +1126,7 @@
 		"name": "proposals",
 		"outputs": [
 			{
-				"internalType": "enum KaliDAO.ProposalType",
+				"internalType": "enum SportsClubDAO.ProposalType",
 				"name": "proposalType",
 				"type": "uint8"
 			},
@@ -1167,7 +1167,7 @@
 	{
 		"inputs": [
 			{
-				"internalType": "enum KaliDAO.ProposalType",
+				"internalType": "enum SportsClubDAO.ProposalType",
 				"name": "proposalType",
 				"type": "uint8"
 			},

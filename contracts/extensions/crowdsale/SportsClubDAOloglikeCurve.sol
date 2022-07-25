@@ -4,12 +4,12 @@ pragma solidity >=0.8.4;
 
 import '../../libraries/SafeTransferLib.sol';
 import '../../interfaces/IERC20minimal.sol';
-import '../../interfaces/IKaliWhitelistManager.sol';
+import '../../interfaces/ISportsClubWhitelistManager.sol';
 import '../../utils/ReentrancyGuard.sol';
 
 /// @notice Crowdsale contract that receives ETH or tokens to mint registered DAO tokens, including merkle whitelisting.
 /// @dev This is meant to simulate a logarithmic curve with significantly less computation.
-contract KaliDAOloglikeCurve is ReentrancyGuard {
+contract SportsClubDAOloglikeCurve is ReentrancyGuard {
     using SafeTransferLib for address;
 
     event ExtensionSet(
@@ -34,7 +34,7 @@ contract KaliDAOloglikeCurve is ReentrancyGuard {
 
     error InvalidVelocity();
     
-    IKaliWhitelistManager public immutable whitelistManager;
+    ISportsClubWhitelistManager public immutable whitelistManager;
 
     mapping(address => Crowdsale) public crowdsales;
 
@@ -49,7 +49,7 @@ contract KaliDAOloglikeCurve is ReentrancyGuard {
         uint32 saleEnds;
     }
 
-    constructor(IKaliWhitelistManager whitelistManager_) {
+    constructor(ISportsClubWhitelistManager whitelistManager_) {
         whitelistManager = whitelistManager_;
     }
 

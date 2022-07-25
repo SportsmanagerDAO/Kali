@@ -3,16 +3,16 @@
 pragma solidity >=0.8.4;
 
 import '../../libraries/SafeTransferLib.sol';
-import './interfaces/IKaliDAOtribute.sol';
+import './interfaces/ISportsClubDAOtribute.sol';
 import '../../utils/Multicall.sol';
 import '../../utils/ReentrancyGuard.sol';
 
 /// @notice Tribute contract that escrows ETH or tokens for DAO proposals.
-contract KaliDAOtribute is ReentrancyGuard {
+contract SportsClubDAOtribute is ReentrancyGuard {
     using SafeTransferLib for address;
 
     event NewTributeProposal(
-        IKaliDAOtribute indexed dao,
+        ISportsClubDAOtribute indexed dao,
         address indexed proposer, 
         uint256 indexed proposal, 
         address asset, 
@@ -20,9 +20,9 @@ contract KaliDAOtribute is ReentrancyGuard {
         uint256 value
     );
 
-    event TributeProposalCancelled(IKaliDAOtribute indexed dao, uint256 indexed proposal);
+    event TributeProposalCancelled(ISportsClubDAOtribute indexed dao, uint256 indexed proposal);
 
-    event TributeProposalReleased(IKaliDAOtribute indexed dao, uint256 indexed proposal);
+    event TributeProposalReleased(ISportsClubDAOtribute indexed dao, uint256 indexed proposal);
     
     error NotProposer();
 
@@ -32,10 +32,10 @@ contract KaliDAOtribute is ReentrancyGuard {
 
     error NotProcessed();
 
-    mapping(IKaliDAOtribute => mapping(uint256 => Tribute)) public tributes;
+    mapping(ISportsClubDAOtribute => mapping(uint256 => Tribute)) public tributes;
 
     struct Tribute {
-        IKaliDAOtribute dao;
+        ISportsClubDAOtribute dao;
         address proposer;
         address asset;
         bool nft;
@@ -43,8 +43,8 @@ contract KaliDAOtribute is ReentrancyGuard {
     }
 
     function submitTributeProposal(
-        IKaliDAOtribute dao,
-        IKaliDAOtribute.ProposalType proposalType, 
+        ISportsClubDAOtribute dao,
+        ISportsClubDAOtribute.ProposalType proposalType, 
         string memory description,
         address[] calldata accounts,
         uint256[] calldata amounts,
@@ -81,7 +81,7 @@ contract KaliDAOtribute is ReentrancyGuard {
         emit NewTributeProposal(dao, msg.sender, proposal, asset, nft, value);
     }
 
-    function cancelTributeProposal(IKaliDAOtribute dao, uint256 proposal) public nonReentrant virtual {
+    function cancelTributeProposal(ISportsClubDAOtribute dao, uint256 proposal) public nonReentrant virtual {
         Tribute storage trib = tributes[dao][proposal];
 
         if (msg.sender != trib.proposer) revert NotProposer();
@@ -104,7 +104,7 @@ contract KaliDAOtribute is ReentrancyGuard {
         emit TributeProposalCancelled(dao, proposal);
     }
 
-    function releaseTributeProposal(IKaliDAOtribute dao, uint256 proposal) public nonReentrant virtual {
+    function releaseTributeProposal(ISportsClubDAOtribute dao, uint256 proposal) public nonReentrant virtual {
         Tribute memory trib = tributes[dao][proposal];
 
         if (address(trib.dao) == address(0)) revert NotProposal();
@@ -116,7 +116,7 @@ contract KaliDAOtribute is ReentrancyGuard {
         if (dao.proposalStates(proposal).sponsoredProposal != 0) proposal = 
             dao.proposalStates(proposal).sponsoredProposal;
 
-        IKaliDAOtribute.ProposalState memory prop = dao.proposalStates(proposal);
+        ISportsClubDAOtribute.ProposalState memory prop = dao.proposalStates(proposal);
 
         if (!prop.processed) revert NotProcessed();
 

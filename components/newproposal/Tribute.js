@@ -39,7 +39,7 @@ export default function BuyCrowdsale() {
 
       const payload_ = Array(0);
 
-      const tribAbi = require("../../abi/KaliDAOtribute.json");
+      const tribAbi = require("../../abi/SportsClubDAOtribute.json");
 
       const tribAddress = extensions.tribute;
 

@@ -13,7 +13,7 @@ export default function Layout(props) {
     <>
       {loading == true ? <LoadingIndicator /> : ""}
       <Head>
-        <title>KaliDAO</title>
+        <title>SportsClubDAO</title>
         <meta
           property="og:title"
           content="optimized DAC protocol"

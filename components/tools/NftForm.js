@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import kaliNFT from "../../eth/kaliNFT.js";
+import sportsClubNFT from "../../eth/sportsClubNFT.js";
 import { Button } from "@chakra-ui/react";
 import FlexGradient from "../elements/FlexGradient.js";
 import { Formik, Form } from "formik";
@@ -70,12 +70,12 @@ function NftForm(props) {
   };
 
   const handleNftSubmit = async (values) => {
-    const tokenId = await kaliNFT.methods.totalSupply().call();
+    const tokenId = await sportsClubNFT.methods.totalSupply().call();
     const metadata = await upload(values);
     const tokenUri = await uploadMetadata(metadata);
 
     try {
-      let result = await kaliNFT.methods
+      let result = await sportsClubNFT.methods
         .mint(dao, tokenId, tokenUri)
         .send({ from: account });
 

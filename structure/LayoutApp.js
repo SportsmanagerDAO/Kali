@@ -3,7 +3,7 @@ import AppContext from "../../context/AppContext";
 import { Container, HStack, Center, Spacer } from "@chakra-ui/react";
 import Head from "next/head";
 import NavRightContainer from "./NavRightContainer";
-import Kali from "./SportsClub";
+import SportsClub from "./SportsClub";
 import ActionMenu from "./ActionMenu";
 import LoadingIndicator from "./Loading";
 import Footer from "./Footer";
@@ -33,7 +33,7 @@ export default function Layout(props) {
         maxW='300px'
         width={{sm: '200px', md: '250px', lg: '300px'}}
       >
-          <Center><Kali /></Center>
+          <Center><SportsClub /></Center>
           <ActionMenu />
       </Container>
       <Container

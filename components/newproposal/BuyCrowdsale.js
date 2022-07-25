@@ -66,7 +66,7 @@ export default function Tribute() {
         value_ = amount_;
       }
       
-      const saleAbi = require("../../abi/KaliDAOcrowdsale.json");
+      const saleAbi = require("../../abi/SportsClubDAOcrowdsale.json");
       
       const instance = new web3.eth.Contract(saleAbi, extAddress);
 

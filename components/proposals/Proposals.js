@@ -28,7 +28,7 @@ export default function Proposals(props) {
   async function fetchData() {
     value.setLoading(true);
     try {
-      let abi = require("../../abi/KaliDAO.json");
+      let abi = require("../../abi/SportsClubDAO.json");
       let instance = new web3.eth.Contract(abi, address);
       let proposals_ = await fetchProposals(instance, address, web3, daoChain, dao);
       value.setProposals(proposals_);

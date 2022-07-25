@@ -19,7 +19,7 @@ SportsClub is built for on-chain companies and funds. Proposals are broken out i
 
 ## Token Voting, Delegation & MetaTX
 
-SportsClub tokens ([`SportsClubDAOtoken`](https://github.com/lexDAO/Kali/blob/main/contracts/KaliDAOtoken.sol)) represent voting stakes, and can be launched as transferable or non-transferable, with such settings being updateable via `PAUSE` proposal (see below). This allows for DACs to launch with closed membership (similar to Moloch-style 'clubs') but still retain the option to open their seats to the public. This configurability, in addition to appealing to different deployer preferences, can allow orgs to plan around compliance objectives.
+SportsClub tokens ([`SportsClubDAOtoken`](https://github.com/lexDAO/SportsClub/blob/main/contracts/SportsClubDAOtoken.sol)) represent voting stakes, and can be launched as transferable or non-transferable, with such settings being updateable via `PAUSE` proposal (see below). This allows for DACs to launch with closed membership (similar to Moloch-style 'clubs') but still retain the option to open their seats to the public. This configurability, in addition to appealing to different deployer preferences, can allow orgs to plan around compliance objectives.
 
 Voting weight can also be delegated, and such weight automatically updates upon token transfers from delegators, incorporating functionality from Comp-style tokens (with an improvement of 'auto delegation' to new accounts to avoid an extra transaction for SportsClub users). 
 
@@ -29,7 +29,7 @@ SportsClub tokens are further designed with gas efficiency in mind and have inco
 
 ## NFT Vault
 
-SportsClub supports both ERC-721 and ERC-1155 NFT `safeTransferFrom()` through the [`NFThelper`](https://github.com/lexDAO/Kali/blob/main/contracts/NFThelper.sol) module. NFTs can be managed through `CALL` proposals (see below).
+SportsClub supports both ERC-721 and ERC-1155 NFT `safeTransferFrom()` through the [`NFThelper`](https://github.com/lexDAO/SportsClub/blob/main/contracts/NFThelper.sol) module. NFTs can be managed through `CALL` proposals (see below).
 
 ## Proposal Types
 
@@ -78,7 +78,7 @@ Currently, the following extensions are supported on deployment (by factory call
 
 ### [Crowdsale](./contracts/extensions/crowdsale)
 
-A DAO can set a price for its membership in ETH or a designated token, a time limit for purchases, as well as limit purchases among a whitelist. Whitelisting is managed through an external access control contract, [`SportsClubWhitelistManager`](https://github.com/lexDAO/Kali/blob/main/contracts/access/KaliWhiteListManager.sol), which allows multiple DAOs to use the same merkle root to offer membership. Altogether, this allows for more immediate access and weighting of membership based on predictable contributions. Further, a DAO can update a crowdsale in the event terms need to be amended.
+A DAO can set a price for its membership in ETH or a designated token, a time limit for purchases, as well as limit purchases among a whitelist. Whitelisting is managed through an external access control contract, [`SportsClubWhitelistManager`](https://github.com/lexDAO/SportsClub/blob/main/contracts/access/SportsClubWhiteListManager.sol), which allows multiple DAOs to use the same merkle root to offer membership. Altogether, this allows for more immediate access and weighting of membership based on predictable contributions. Further, a DAO can update a crowdsale in the event terms need to be amended.
 
 ### [Redemption](./contracts/extensions/redemption)
 
@@ -102,7 +102,7 @@ Further, all SportsClub function calls are batchable using `multicall()`, adapte
 
 ## Security
 
-SportsClub adopts standard security conventions, including a [`ReentrancyGuard`](https://github.com/lexDAO/Kali/blob/main/contracts/ReentrancyGuard.sol) module for core functions to avoid the potential of reentrancy attacks, as well as an internal function, `_computeDomainSeparator()` to help protect against signature replay in the event of a blockchain fork. In addition, as much as possible, SportsClub incorporates well-tested and common solidity patterns to make the code easier to audit and avoid 'reinventing the wheel', which can lead to the known unknown of novel attack surfaces. [Tests](https://github.com/lexDAO/Kali/blob/main/test/KaliDAO.test.js) are also included in JavaScript to demonstrate the performance of SportsClub operations. An audit report provided by [BlockApex](https://twitter.com/block_apex) can be reviewed [here](https://github.com/lexDAO/Kali/blob/main/audit/Final_Audit_KaliDAO.pdf) for the SportsClub core contracts.
+SportsClub adopts standard security conventions, including a [`ReentrancyGuard`](https://github.com/lexDAO/SportsClub/blob/main/contracts/ReentrancyGuard.sol) module for core functions to avoid the potential of reentrancy attacks, as well as an internal function, `_computeDomainSeparator()` to help protect against signature replay in the event of a blockchain fork. In addition, as much as possible, SportsClub incorporates well-tested and common solidity patterns to make the code easier to audit and avoid 'reinventing the wheel', which can lead to the known unknown of novel attack surfaces. [Tests](https://github.com/lexDAO/SportsClub/blob/main/test/SportsClubDAO.test.js) are also included in JavaScript to demonstrate the performance of SportsClub operations. An audit report provided by [BlockApex](https://twitter.com/block_apex) can be reviewed [here](https://github.com/lexDAO/SportsClub/blob/main/audit/Final_Audit_SportsClubDAO.pdf) for the SportsClub core contracts.
 
 ## Deployments
 

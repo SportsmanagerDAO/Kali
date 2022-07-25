@@ -26,7 +26,7 @@ describe("SportsClubDAO", function () {
     ;[proposer, alice, bob] = await ethers.getSigners()
 
     // SportsClub = await ethers.getContractFactory("SportsClubDAO")
-    SportsClub = await ethers.getContractFactory("KaliDAO")
+    SportsClub = await ethers.getContractFactory("SportsClubDAO")
     sportsClub = await SportsClub.deploy()
     await sportsClub.deployed()
     // console.log(sportsClub.address)
@@ -996,12 +996,12 @@ describe("SportsClubDAO", function () {
     )
     // Instantiate SportsClubWhiteListManager
     let SportsClubWhitelistManager = await ethers.getContractFactory(
-      "KaliWhitelistManager"
+      "SportsClubWhitelistManager"
     )
     let sportsClubWhitelistManager = await SportsClubWhitelistManager.deploy()
     await sportsClubWhitelistManager.deployed()
     // Instantiate extension contract
-    let SportsClubDAOcrowdsale = await ethers.getContractFactory("KaliDAOcrowdsale")
+    let SportsClubDAOcrowdsale = await ethers.getContractFactory("SportsClubDAOcrowdsale")
     let sportsClubDAOcrowdsale = await SportsClubDAOcrowdsale.deploy(
       sportsClubWhitelistManager.address
     )
@@ -1063,12 +1063,12 @@ describe("SportsClubDAO", function () {
     )
     // Instantiate SportsClubWhiteListManager
     let SportsClubWhitelistManager = await ethers.getContractFactory(
-      "KaliWhitelistManager"
+      "SportsClubWhitelistManager"
     )
     let sportsClubWhitelistManager = await SportsClubWhitelistManager.deploy()
     await sportsClubWhitelistManager.deployed()
     // Instantiate extension contract
-    let SportsClubDAOcrowdsale = await ethers.getContractFactory("KaliDAOcrowdsale")
+    let SportsClubDAOcrowdsale = await ethers.getContractFactory("SportsClubDAOcrowdsale")
     let sportsClubDAOcrowdsale = await SportsClubDAOcrowdsale.deploy(
       sportsClubWhitelistManager.address
     )

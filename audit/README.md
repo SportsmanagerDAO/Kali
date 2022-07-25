@@ -1,1 +1,1 @@
-KaliDAO contract audit reports.
+SportsClubDAO contract audit reports.

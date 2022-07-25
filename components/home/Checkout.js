@@ -97,7 +97,7 @@ export default function Checkout(props) {
         let now = parseInt(new Date().getTime() / 1000);
         saleEnds += now;
 
-        const sale = require("../../abi/KaliDAOcrowdsale.json");
+        const sale = require("../../abi/SportsClubDAOcrowdsale.json");
 
         const saleAddress = addresses[chainId]["extensions"]["crowdsale"];
 
@@ -122,7 +122,7 @@ export default function Checkout(props) {
         let now = parseInt(new Date().getTime() / 1000);
         redemptionStart += now;
 
-        const redemption = require("../../abi/KaliDAOredemption.json");
+        const redemption = require("../../abi/SportsClubDAOredemption.json");
 
         const redemptionAddress =
           addresses[chainId]["extensions"]["redemption"];
@@ -163,7 +163,7 @@ export default function Checkout(props) {
 
     try {
       let result = await factory.methods
-        .deployKaliDAO(
+        .deploySportsClubDAO(
           daoName,
           symbol,
           docs,
@@ -177,7 +177,7 @@ export default function Checkout(props) {
         )
         .send({ from: account });
 
-      let dao = result["events"]["DAOdeployed"]["returnValues"]["kaliDAO"];
+      let dao = result["events"]["DAOdeployed"]["returnValues"]["sportsClubDAO"];
       console.log(dao);
       console.log(result);
 
